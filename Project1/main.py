@@ -44,11 +44,14 @@ def FaceInPage():
     nationalities = pd.read_csv("CH_Nationality_List_20171130_v1.csv")
     nationalities_array = nationalities.to_numpy(dtype=str)
     face_in_page['Nationality'] = [nationalities_array[random.randint(0, 224)][0] for i in range(num_users)]
-    print(face_in_page)
 
     # generating country code
+    face_in_page['CountryCode'] = [random.randint(0, 50) for i in range(num_users)]
 
     # generating hobbies
+    hobbies = pd.read_csv("hobbylist.csv", usecols=["Hobby-name"])
+    hobbies_array = hobbies.to_numpy(dtype=str)
+    face_in_page['Hobbies'] = [hobbies_array[random.randint(0, len(hobbies_array)-1)] for i in range(num_users)]
 
 
 relMap = {}
