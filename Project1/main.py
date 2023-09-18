@@ -82,7 +82,7 @@ def Associates():
     associates['DateOfFriendship'] = [faker.date().replace("-", "")[2::] for i in range(relations)]
 
     # Generating Desc
-    desc_list = ['Friends', 'College Friends', 'Family']
+    desc_list = ['Friend', 'College Friend', 'Family', 'Relative', 'Online Friend', 'Partner', 'Other']
 
     associates['Desc'] = [desc_list[random.randint(0, len(desc_list) - 1)] for i in range(relations)]
     associates.to_csv('associates.csv', index=False)
