@@ -7,7 +7,8 @@ import datetime
 # https://towardsdatascience.com/build-a-your-own-custom-dataset-using-python-9296540a0178 source
 
 # FaceInPage
-num_users = 1000
+num_users = 200#200000
+
 features = [
     "ID",
     "Name",
@@ -18,7 +19,7 @@ features = [
 face_in_page = pd.DataFrame(columns=features)
 
 # Associates
-relations = 1000  # 19999999
+relations = 2000 #20000000
 
 associates_features = [
     'FriendRel',
@@ -28,7 +29,21 @@ associates_features = [
     'Desc'
 ]
 
+
 associates = pd.DataFrame(columns=associates_features)
+
+accesses = 1000 #10000000
+
+access_features = [
+    'AccessID',
+    'ByWho',
+    'WhatPage',
+    'TypeOfAccess',
+    'AccessTime'
+]
+
+access_logs = pd.DataFrame(columns=access_features)
+
 
 faker = Faker()
 
@@ -51,8 +66,9 @@ def FaceInPage():
     # generating hobbies
     hobbies = pd.read_csv("hobbylist.csv", usecols=["Hobby-name"])
     hobbies_array = hobbies.to_numpy(dtype=str)
-    face_in_page['Hobbies'] = [hobbies_array[random.randint(0, len(hobbies_array)-1)] for i in range(num_users)]
+    face_in_page['Hobby'] = [hobbies_array[random.randint(0, len(hobbies_array)-1)][0] for i in range(num_users)]
 
+    face_in_page.to_csv("faceInPageTest.csv", index=False)
 
 relMap = {}
 alist = []
@@ -66,14 +82,8 @@ def Associates():
     # Generate Person A ID
     # Generate Person B ID
     for i in range(relations):
-        currentA = random.randint(0, len(face_in_page))
-        currentB = random.randint(0, len(face_in_page))
-        check(currentA, currentB)
+        (check(random.randint(0, len(face_in_page)), random.randint(0, len(face_in_page))))
 
-        relMap[currentB] = currentA
-        relMap[currentA] = currentB
-        alist.append(currentA)
-        blist.append(currentB)
     associates['PersonA_ID'] = alist
     associates['PersonB_ID'] = blist
 
@@ -82,25 +92,72 @@ def Associates():
     associates['DateOfFriendship'] = [faker.date().replace("-", "")[2::] for i in range(relations)]
 
     # Generating Desc
-    desc_list = ['Friends', 'College Friends', 'Family']
+    desc_list = ['Friend', 'College Friend', 'Family', 'Relative', 'Online Friend', 'Partner', 'Other']
 
     associates['Desc'] = [desc_list[random.randint(0, len(desc_list) - 1)] for i in range(relations)]
-    associates.to_csv('associates.csv', index=False)
-    print(associates)
+    associates.to_csv('associatesTest.csv', index=False)
+    # print(associates)
 
 
 # Method to help check for relations that already exist, if so then regenerate both
 def check(currentA, currentB):
+    # print(currentA)
     if relMap.get(currentA) == currentB or relMap.get(currentA) == currentB:
-        print("Duplicated " + str(currentA) + ", " + str(currentB))
         new_A = random.randint(0, len(face_in_page))
         new_B = random.randint(0, len(face_in_page))
         check(new_A, new_B)
+    else:
+        relMap[currentB] = currentA
+        relMap[currentA] = currentB
+        alist.append(currentA)
+        blist.append(currentB)
+
+
+def check_dups(bywho, whatpage):
+    if bywho == whatpage:
+        return True
+    return False
+
+
+by_who_list = []
+what_page_list = []
+def Access_logs():
+    # AccessID: unique sequential int from 1 to 10,000,000
+    access_logs['AccessID'] = [(i + 1) for i in range(accesses)]
+
+    #  ByWho: references the ID of the person who has accessed the FaceInPage
+    # access_logs['ByWho'] = [random.randint(0, len(face_in_page) - 1)
+
+    for i in range(accesses):
+        bywho = random.randint(0, len(face_in_page))
+        whatpage = random.randint(0, len(face_in_page))
+
+        if (check_dups(bywho, whatpage)):
+            whatpage = random.randint(0, len(face_in_page))
+
+        by_who_list.append(bywho)
+        what_page_list.append(whatpage)
+
+    # WhatPage: references the ID of the page that was accessed
+
+    access_logs['ByWho'] = by_who_list
+    access_logs['WhatPage'] = what_page_list
+
+    # Generate TypeOfAccess
+    type_list = ['just viewed', 'left a note', 'added a friendship', 'reported', 'left a like']
+    access_logs['TypeOfAccess'] = [type_list[random.randint(0, len(type_list) - 1)] for i in range(accesses)]
+
+    # AccessTime: random number between 1 and 1,000,000 (or epoch time
+    access_logs['AccessTime'] = [(random.randint(1, 1000000)) for i in range(accesses)]
+
+    access_logs.to_csv('accessLogsTest.csv', index=False)
+    # print(access_logs)
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     FaceInPage()
     Associates()
+    Access_logs()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
