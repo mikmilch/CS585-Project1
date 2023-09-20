@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fee0956f-0d24-4e3f-9071-cd8ad824b6c9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Project1/CH_Nationality_List_20171130_v1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/python/CH_Nationality_List_20171130_v1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/associates.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/hobbylist.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test/java/TaskBTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/Test/java/TaskBTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test/java/TaskaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/Test/java/TaskaTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TaskB.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/python/CH_Nationality_List_20171130_v1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/python/hobbylist.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/python/hobbylist.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/python/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/python/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/src/Test/java/TaskaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/Test/java/TaskaTest.java" afterDir="false" />
     </list>
     <list id="e4542962-d385-4522-8772-90110580e571" name="Changes by madel" comment="" />
     <list id="38587c85-cb04-4adf-85a5-008dbeeafd8e" name="Changes by mikaelamilch" comment="" />

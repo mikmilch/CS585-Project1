@@ -28,7 +28,7 @@ public class Main {
 
             String[] split = line.split(",");
 
-            if (split[2].equals("American")) {
+            if (split[2].equals("Chinese")) {
                 outkey.set(split[1]);
                 outvalue.set(split[4]);
 

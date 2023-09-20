@@ -16,7 +16,7 @@ public class TaskaTest {
 //        input[0] = "hdfs://localhost:9000/project0/data.txt";
 //        input[1] = "hdfs://localhost:9000/project0/output.txt";
 
-        input[0] = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/src/main/data/Testing/faceInPageTest.csv";
+        input[0] = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/src/main/python/faceInPageTest.csv";
         input[1] = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output";
 
         Main main = new Main();
