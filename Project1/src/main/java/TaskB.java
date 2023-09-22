@@ -21,10 +21,8 @@ public class TaskB {
             String line = value.toString();
             String[] split = line.split(",");
 
-            for (String value : split) {
-                outkey.set(value[1]);
-                context.write(outkey, one);
-            }
+            outkey.set(split[2]);
+            context.write(outkey, one);
         }
     }
 
