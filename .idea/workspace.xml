@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fee0956f-0d24-4e3f-9071-cd8ad824b6c9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Project1/src/Test/java/TaskaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/Test/java/TaskaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/src/Test/java/TaskBTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/Test/java/TaskBTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskB.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskB.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskB.class" afterDir="false" />
     </list>
     <list id="e4542962-d385-4522-8772-90110580e571" name="Changes by madel" comment="" />
     <list id="38587c85-cb04-4adf-85a5-008dbeeafd8e" name="Changes by mikaelamilch" comment="" />
@@ -46,7 +49,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "refactoring",
+    "git-widget-placeholder": "taskB",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -64,7 +67,7 @@
       <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TaskaTest.debug">
+  <component name="RunManager" selected="JUnit.TaskBTest.debug">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -197,6 +200,26 @@
       <option name="USE_PATTERN" value="false" />
       <method v="2" />
     </configuration>
+    <configuration name="TaskBTest.debug" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Project1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TaskBTest" />
+      <option name="METHOD_NAME" value="debug" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskCTest.debug" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Project1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TaskCTest" />
+      <option name="METHOD_NAME" value="debug" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TaskaTest.debug" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Project1" />
       <option name="PACKAGE_NAME" value="" />
@@ -262,6 +285,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TaskBTest.debug" />
+        <item itemvalue="JUnit.TaskCTest.debug" />
         <item itemvalue="JUnit.TaskaTest.debug" />
       </list>
     </recent_temporary>

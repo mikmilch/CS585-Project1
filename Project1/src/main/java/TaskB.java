@@ -21,6 +21,7 @@ public class TaskB {
             String line = value.toString();
             String[] split = line.split(",");
 
+            System.out.println(split[2]);
             outkey.set(split[2]);
             context.write(outkey, one);
         }
@@ -47,7 +48,7 @@ public class TaskB {
 
         job2.setJarByClass(TaskB.class);
         job2.setMapperClass(Map.class);
-        job2.setCombinerClass(TaskB.class);
+//        job2.setCombinerClass(TaskB.class);
         job2.setReducerClass(Reduce.class);
 
         job2.setOutputKeyClass(Text.class);
@@ -59,4 +60,4 @@ public class TaskB {
         System.exit(job2.waitForCompletion(true) ? 0 : 1);
     }
 }
-}
+

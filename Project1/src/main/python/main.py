@@ -7,7 +7,7 @@ import datetime
 # https://towardsdatascience.com/build-a-your-own-custom-dataset-using-python-9296540a0178 source
 
 # FaceInPage
-num_users = 200#200000
+num_users = 200000
 
 features = [
     "ID",
@@ -19,7 +19,7 @@ features = [
 face_in_page = pd.DataFrame(columns=features)
 
 # Associates
-relations = 2000 #20000000
+relations = 20000000
 
 associates_features = [
     'FriendRel',
@@ -32,7 +32,7 @@ associates_features = [
 
 associates = pd.DataFrame(columns=associates_features)
 
-accesses = 1000 #10000000
+accesses = 10000000
 
 access_features = [
     'AccessID',
@@ -61,14 +61,14 @@ def FaceInPage():
     face_in_page['Nationality'] = [nationalities_array[random.randint(0, 224)][0] for i in range(num_users)]
 
     # generating country code
-    face_in_page['CountryCode'] = [random.randint(0, 50) for i in range(num_users)]
+    face_in_page['CountryCode'] = [random.randint(1, 50) for i in range(num_users)]
 
     # generating hobbies
     hobbies = pd.read_csv("hobbylist.csv", usecols=["Hobby-name"])
     hobbies_array = hobbies.to_numpy(dtype=str)
     face_in_page['Hobby'] = [hobbies_array[random.randint(0, len(hobbies_array)-1)][0] for i in range(num_users)]
 
-    face_in_page.to_csv("faceInPageTest.csv", index=False)
+    face_in_page.to_csv("faceInPage.csv", index=False)
 
 relMap = {}
 alist = []
@@ -82,7 +82,7 @@ def Associates():
     # Generate Person A ID
     # Generate Person B ID
     for i in range(relations):
-        (check(random.randint(0, len(face_in_page)), random.randint(0, len(face_in_page))))
+        (check(random.randint(1, len(face_in_page)), random.randint(1, len(face_in_page))))
 
     associates['PersonA_ID'] = alist
     associates['PersonB_ID'] = blist
@@ -95,7 +95,7 @@ def Associates():
     desc_list = ['Friend', 'College Friend', 'Family', 'Relative', 'Online Friend', 'Partner', 'Other']
 
     associates['Desc'] = [desc_list[random.randint(0, len(desc_list) - 1)] for i in range(relations)]
-    associates.to_csv('associatesTest.csv', index=False)
+    associates.to_csv('associates.csv', index=False)
     # print(associates)
 
 
@@ -103,8 +103,8 @@ def Associates():
 def check(currentA, currentB):
     # print(currentA)
     if relMap.get(currentA) == currentB or relMap.get(currentA) == currentB:
-        new_A = random.randint(0, len(face_in_page))
-        new_B = random.randint(0, len(face_in_page))
+        new_A = random.randint(1, len(face_in_page))
+        new_B = random.randint(1, len(face_in_page))
         check(new_A, new_B)
     else:
         relMap[currentB] = currentA
@@ -129,11 +129,11 @@ def Access_logs():
     # access_logs['ByWho'] = [random.randint(0, len(face_in_page) - 1)
 
     for i in range(accesses):
-        bywho = random.randint(0, len(face_in_page))
-        whatpage = random.randint(0, len(face_in_page))
+        bywho = random.randint(1, len(face_in_page))
+        whatpage = random.randint(1, len(face_in_page))
 
         if (check_dups(bywho, whatpage)):
-            whatpage = random.randint(0, len(face_in_page))
+            whatpage = random.randint(1, len(face_in_page))
 
         by_who_list.append(bywho)
         what_page_list.append(whatpage)
@@ -150,7 +150,7 @@ def Access_logs():
     # AccessTime: random number between 1 and 1,000,000 (or epoch time
     access_logs['AccessTime'] = [(random.randint(1, 1000000)) for i in range(accesses)]
 
-    access_logs.to_csv('accessLogsTest.csv', index=False)
+    access_logs.to_csv('accessLogs.csv', index=False)
     # print(access_logs)
 
 
