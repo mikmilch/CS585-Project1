@@ -9,6 +9,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
+import java.util.*;
 
 public class TaskB {
 
@@ -32,14 +33,23 @@ public class TaskB {
         private IntWritable result = new IntWritable();
 
         public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
+            PriorityQueue<Counter> pq = new PriorityQueue<>(new ReducerComparator());
+
             int sum = 0;
             for (IntWritable val : values) {
                 sum += val.get();
             }
             result.set(sum);
+
+            pq.add(new Counter(key, result));
+
+            while (!pq.isEmpty()) {
+                System.out.println(pq.peek().key+" "+pq.poll().sumValue);
+            }
+
+            //pop out first 10 objects
             context.write(key, result);
 
-            //priority queue
             /*
                 write whole object in priority queue
                     make new object to have key,result to put into the priority queue
@@ -48,7 +58,25 @@ public class TaskB {
                     mapper only job (bc only 10 records)
              */
         }
+
+        class Counter {
+            public Text key;
+            public IntWritable sumValue;
+
+            public Counter (Text key, IntWritable sumValue){
+                this.key = key;
+                this.sumValue = sumValue;
+            }
+        }
+
+        class ReducerComparator implements Comparator<Counter> {
+            // Overriding compare()method of Comparator
+            public int compare(Counter s1, Counter s2) {
+                return s1.sumValue.compareTo(s2.sumValue);
+            }
+        }
     }
+
 
     public static void main(String[] args) throws Exception {
         // 1. create a job object
