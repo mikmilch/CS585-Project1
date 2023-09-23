@@ -21,7 +21,6 @@ public class TaskB {
             String line = value.toString();
             String[] split = line.split(",");
 
-            System.out.println(split[2]);
             outkey.set(split[2]);
             context.write(outkey, one);
         }
@@ -39,25 +38,57 @@ public class TaskB {
             }
             result.set(sum);
             context.write(key, result);
+
+            //priority queue
+            /*
+                write whole object in priority queue
+                    make new object to have key,result to put into the priority queue
+
+                have to do a join to get name & nationality
+                    mapper only job (bc only 10 records)
+             */
         }
     }
 
     public static void main(String[] args) throws Exception {
+        // 1. create a job object
         Configuration conf = new Configuration();
-        Job job2 = Job.getInstance(conf, "Task B");
+        Job job = Job.getInstance(conf, "Task B");
 
-        job2.setJarByClass(TaskB.class);
-        job2.setMapperClass(Map.class);
-//        job2.setCombinerClass(TaskB.class);
-        job2.setReducerClass(Reduce.class);
+        // 2. map the jar class
+        job.setJarByClass(TaskB.class);
 
-        job2.setOutputKeyClass(Text.class);
-        job2.setOutputValueClass(IntWritable.class);
+        // 3. map both the mapper and reducer class
+        job.setMapperClass(Map.class);
+        job.setReducerClass(Reduce.class);
+//        job.setCombinerClass(TaskB.class);
 
+        // 4. set up the output key value data type class
+
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(IntWritable.class);
+
+        // 5. set up the final output key value data type class
+
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(IntWritable.class);
+
+
+        // 6. Specify the input and output path
+        FileInputFormat.setInputPaths(job, new Path("/Users/mikaelamilch/Downloads/data/Testing/accessLogsTest.csv"));
+        FileOutputFormat.setOutputPath(job, new Path("/Users/mikaelamilch/Library/CloudStorage/OneDrive-WorcesterPolytechnicInstitute(wpi.edu)/2023-2024/CS 585/CS585-Project1/testb_output"));
         // maybe need to change args to args[1] and args[2]
-        FileInputFormat.addInputPath(job2, new Path(args[0]));
-        FileOutputFormat.setOutputPath(job2, new Path(args[1]));
-        System.exit(job2.waitForCompletion(true) ? 0 : 1);
+//        FileInputFormat.addInputPath(job, new Path(args[0]));
+//        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        //        System.exit(job.waitForCompletion(true) ? 0 : 1);
+
+
+        // 7. submit the job
+        boolean result = job.waitForCompletion(true);
+
+        System.exit(result ? 0 : 1);
+
     }
 }
+
 
