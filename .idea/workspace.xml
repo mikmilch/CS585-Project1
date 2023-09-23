@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fee0956f-0d24-4e3f-9071-cd8ad824b6c9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Project1/src/Test/java/TaskaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/Test/java/TaskaTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project1/src/Test/java/TaskDClass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/.part-r-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/part-r-00000" beforeDir="false" />
     </list>
     <list id="e4542962-d385-4522-8772-90110580e571" name="Changes by madel" comment="" />
     <list id="38587c85-cb04-4adf-85a5-008dbeeafd8e" name="Changes by mikaelamilch" comment="" />
@@ -46,7 +52,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "refactoring",
+    "git-widget-placeholder": "taskD",
+    "last_opened_file_path": "C:/Users/nickl/OneDrive/Desktop/data/Testing/associatesTest.csv",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -64,7 +71,7 @@
       <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TaskaTest.debug">
+  <component name="RunManager" selected="Application.TaskD">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -197,6 +204,13 @@
       <option name="USE_PATTERN" value="false" />
       <method v="2" />
     </configuration>
+    <configuration name="TaskD" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TaskD" />
+      <module name="Project1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TaskaTest.debug" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Project1" />
       <option name="PACKAGE_NAME" value="" />
@@ -262,6 +276,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TaskD" />
         <item itemvalue="JUnit.TaskaTest.debug" />
       </list>
     </recent_temporary>
@@ -277,6 +292,15 @@
       <workItem from="1694713017206" duration="9024000" />
       <workItem from="1695219444682" duration="1674000" />
     </task>
+    <task id="LOCAL-00001" summary="First part of taskB should now work.">
+      <option name="closed" value="true" />
+      <created>1695397062375</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1695397062375</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -292,5 +316,25 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="First part of taskB should now work." />
+    <option name="LAST_COMMIT_MESSAGE" value="First part of taskB should now work." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Project1/src/Test/java/TaskCTest.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Project1/src/main/java/TaskD.java</url>
+          <line>228</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
