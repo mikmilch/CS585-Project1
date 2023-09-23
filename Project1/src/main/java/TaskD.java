@@ -111,6 +111,9 @@ public class TaskD {
         private ArrayList<Text> countList = new ArrayList<Text>();
         private ArrayList<Text> faceInList = new ArrayList<Text>();
 
+        private Text test1 = new Text();
+        private Text test2 = new Text();
+
         public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
 
             countList.clear();
@@ -122,6 +125,7 @@ public class TaskD {
                     faceInList.add(new Text(test.toString().substring(1)));
                 }
                 else{
+
                     countList.add(new Text(test.toString().substring(1)));
                 }
             }
@@ -130,10 +134,16 @@ public class TaskD {
 
             for (Text F : faceInList){
 
-                for (Text C : countList){
-
-                    context.write(F, C);
+                if (countList.size() == 0){
+                    context.write(F, new Text("0"));
                 }
+                else {
+                    for (Text C : countList) {
+//                        System.out.println("F: " + F + ", C: " + C);
+                        context.write(F, C);
+                    }
+                }
+
             }
         }
     }
@@ -152,6 +162,7 @@ public class TaskD {
         job4.setOutputValueClass(IntWritable.class);
 
         String input = "hdfs://localhost:9000/Project1/Testing/associatesTest.csv";
+//        String input = "file:///C:/Users/nickl/OneDrive/Desktop/data/Testing/tested.csv";
         String output = "file:///C:/Users/nickl/OneDrive/Desktop/output";
 
         FileInputFormat.addInputPath(job4, new Path(input));

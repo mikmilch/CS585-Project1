@@ -6,12 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="fee0956f-0d24-4e3f-9071-cd8ad824b6c9" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/Project1/src/Test/java/TaskDClass.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/output/._SUCCESS.crc" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/output/.part-r-00000.crc" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/output/_SUCCESS" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/output/part-r-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output2/part-r-00000" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output2/part-r-00000" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" afterDir="false" />
     </list>
     <list id="e4542962-d385-4522-8772-90110580e571" name="Changes by madel" comment="" />
     <list id="38587c85-cb04-4adf-85a5-008dbeeafd8e" name="Changes by mikaelamilch" comment="" />
@@ -331,8 +332,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Project1/src/main/java/TaskD.java</url>
-          <line>228</line>
+          <line>171</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Project1/src/main/java/TaskD.java</url>
+          <line>134</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
