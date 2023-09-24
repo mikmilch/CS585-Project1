@@ -6,12 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fee0956f-0d24-4e3f-9071-cd8ad824b6c9" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/Project1/src/Test/java/TaskDClass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskE.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/._SUCCESS.crc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/.part-r-00000.crc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/_SUCCESS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/part-r-00000" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output2/part-r-00000" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output2/part-r-00000" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" afterDir="false" />
     </list>
     <list id="e4542962-d385-4522-8772-90110580e571" name="Changes by madel" comment="" />
@@ -53,7 +49,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "taskD",
+    "git-widget-placeholder": "taskE",
     "last_opened_file_path": "C:/Users/nickl/OneDrive/Desktop/data/Testing/associatesTest.csv",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -72,7 +68,7 @@
       <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TaskD">
+  <component name="RunManager" selected="Application.TaskE">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -212,6 +208,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TaskE" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TaskE" />
+      <module name="Project1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TaskaTest.debug" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Project1" />
       <option name="PACKAGE_NAME" value="" />
@@ -277,6 +280,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TaskE" />
         <item itemvalue="Application.TaskD" />
         <item itemvalue="JUnit.TaskaTest.debug" />
       </list>
@@ -332,7 +336,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Project1/src/main/java/TaskD.java</url>
-          <line>171</line>
+          <line>172</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
