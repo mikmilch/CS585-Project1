@@ -73,12 +73,18 @@ public class TaskE {
             String[] split = line.split(",");
 
             if (!split[1].equals("ByWho")){
-                if (!distinctList.contains(new Text(split[1] + split[2]))) {
+                System.out.println(split[1] + " " + split[2]);
+                System.out.println(distinctList.contains(new Text(split[1] + " " + split[2])));
+                if (!distinctList.contains(new Text(split[1] + " " + split[2]))) {
                     user.set(split[1]);
-                    distinctList.add(new Text(split[2]));
+                    distinctList.add(new Text(split[1] + " " + split[2]));
                     context.write(user, ones);
                 }
+                else{
+                    System.out.println(split[1] + " " + split[2]);
+                }
             }
+//            System.out.println(distinctList);
 
         }
     }
@@ -223,6 +229,7 @@ public class TaskE {
         job.setOutputValueClass(IntWritable.class);
 
         String input = "hdfs://localhost:9000/Project1/Testing/accessLogsTest.csv";
+//        "file:///C:/Users/nickl/OneDrive/Desktop/data/Testing/accessTesting.csv";
         String output = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskE/total";
 
         FileInputFormat.addInputPath(job, new Path(input));
