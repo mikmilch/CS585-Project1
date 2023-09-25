@@ -1,122 +1,124 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+
+import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FSDataInputStream;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import java.io.IOException;
-import java.util.*;
-
 public class TaskB {
+    public static class PartB_Mapper
+            extends Mapper<LongWritable, Text, IntWritable, IntWritable>{
 
-    public static class Map extends Mapper<Object, Text, Text, IntWritable>{
-
-        private Text outkey = new Text();
         private final static IntWritable one = new IntWritable(1);
+        private final IntWritable outKey = new IntWritable();
 
-        public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
-            String line = value.toString();
-            String[] split = line.split(",");
 
-            outkey.set(split[2]);
-            context.write(outkey, one);
+        @Override
+        protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, IntWritable, IntWritable>.Context context)
+                throws IOException, InterruptedException {
+
+            String[] valueString = value.toString().split(",");
+
+            outKey.set(Integer.parseInt(valueString[2])); // 2 is the Whatpage column
+
+            context.write(outKey,one);
         }
     }
 
+    //REDUCER
+    public static class PartB_Reducer
+            extends Reducer<IntWritable,IntWritable,IntWritable,IntWritable> {
 
-    public static class Reduce
-            extends Reducer<Text,IntWritable,Text,IntWritable> {
-        private IntWritable result = new IntWritable();
+        public static class PageRankByCount implements Comparable<PageRankByCount> {
 
-        public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
-            PriorityQueue<Counter> pq = new PriorityQueue<>(new ReducerComparator());
+            public int pageId;
+            public int accesses;
 
+            public PageRankByCount(int pageId, int accesses) {
+                this.pageId = pageId;
+                this.accesses = accesses;
+            }
+
+            // override the compareTo() to make sure when comparison between two objects in PriorityQueue
+            // they are comparing count of access
+
+            @Override
+            public int compareTo(PageRankByCount obj2) {
+                return Integer.compare(this.accesses, obj2.accesses);
+            }
+        }
+
+        private IntWritable outKey = new IntWritable();
+        private IntWritable outValue = new IntWritable();
+
+        // Stores a map of page ID and count
+        private static PriorityQueue<PageRankByCount> topTen = new PriorityQueue<PageRankByCount>();
+
+        @Override
+        protected void reduce(IntWritable key, Iterable<IntWritable> values, Reducer<IntWritable, IntWritable, IntWritable, IntWritable>.Context context) throws IOException, InterruptedException {
             int sum = 0;
             for (IntWritable val : values) {
                 sum += val.get();
             }
-            result.set(sum);
 
-            pq.add(new Counter(key, result));
+            topTen.add(new PageRankByCount(key.get(), sum));
 
-            while (!pq.isEmpty()) {
-                System.out.println(pq.peek().key+" "+pq.poll().sumValue);
-            }
-
-            //pop out first 10 objects
-            context.write(key, result);
-
-            /*
-                write whole object in priority queue
-                    make new object to have key,result to put into the priority queue
-
-                have to do a join to get name & nationality
-                    mapper only job (bc only 10 records)
-             */
+            if (topTen.size() > 10) topTen.poll();
         }
 
-        class Counter {
-            public Text key;
-            public IntWritable sumValue;
-
-            public Counter (Text key, IntWritable sumValue){
-                this.key = key;
-                this.sumValue = sumValue;
-            }
-        }
-
-        class ReducerComparator implements Comparator<Counter> {
-            // Overriding compare()method of Comparator
-            public int compare(Counter s1, Counter s2) {
-                return s1.sumValue.compareTo(s2.sumValue);
+        @Override
+        protected void cleanup(Reducer<IntWritable, IntWritable, IntWritable, IntWritable>.Context context) throws IOException, InterruptedException {
+            for(PageRankByCount pageCount: topTen){
+                outKey.set(pageCount.pageId);
+                outValue.set(pageCount.accesses);
+                context.write(outKey, outValue);
             }
         }
     }
 
+    // You need another mapper class to handle the join (use replicated (map-side) join)
+    public static class PartB_Join_Mapper
+            extends Mapper<IntWritable,IntWritable,IntWritable,IntWritable> {
+
+    }
 
     public static void main(String[] args) throws Exception {
-        // 1. create a job object
+
+        long timeNow = System.currentTimeMillis();
+
+        // job1 driver code here
         Configuration conf = new Configuration();
-        Job job = Job.getInstance(conf, "Task B");
+        Job job= Job.getInstance(conf, "Top 8 most accessed pages");
 
-        // 2. map the jar class
         job.setJarByClass(TaskB.class);
+        job.setMapperClass(PartB_Mapper.class);
+//        job.setCombinerClass(PartB_Reducer.class);
+        job.setReducerClass(PartB_Reducer.class);
 
-        // 3. map both the mapper and reducer class
-        job.setMapperClass(Map.class);
-        job.setReducerClass(Reduce.class);
-//        job.setCombinerClass(TaskB.class);
-
-        // 4. set up the output key value data type class
-
-        job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(IntWritable.class);
-
-        // 5. set up the final output key value data type class
-
-        job.setOutputKeyClass(Text.class);
+        job.setOutputKeyClass(IntWritable.class);
         job.setOutputValueClass(IntWritable.class);
 
-
-        // 6. Specify the input and output path
-        FileInputFormat.setInputPaths(job, new Path("/Users/mikaelamilch/Downloads/data/Testing/accessLogsTest.csv"));
+        FileInputFormat.setInputPaths(job, new Path("/Users/mikaelamilch/Downloads/data-2/Testing/accessLogsTest.csv"));
         FileOutputFormat.setOutputPath(job, new Path("/Users/mikaelamilch/Library/CloudStorage/OneDrive-WorcesterPolytechnicInstitute(wpi.edu)/2023-2024/CS 585/CS585-Project1/testb_output"));
-        // maybe need to change args to args[1] and args[2]
-//        FileInputFormat.addInputPath(job, new Path(args[0]));
-//        FileOutputFormat.setOutputPath(job, new Path(args[1]));
-        //        System.exit(job.waitForCompletion(true) ? 0 : 1);
+        job.waitForCompletion(true);
 
+        // job2 driver code here!!
 
-        // 7. submit the job
-        boolean result = job.waitForCompletion(true);
-
-        System.exit(result ? 0 : 1);
-
+        // set up a timer to count running time
+        long timeFinish = System.currentTimeMillis();
+        double seconds = (timeFinish - timeNow) /1000.0;
+        System.out.println(seconds + "  seconds");
     }
 }
-
-
