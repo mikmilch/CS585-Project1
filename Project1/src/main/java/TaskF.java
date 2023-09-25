@@ -99,7 +99,7 @@ public class TaskF {
 
             for (String access : AccessSet){
                 if (AssociatesSet.contains(access)){
-                    System.out.println(access);
+//                    System.out.println(access);
                 }
                 AssociatesSet.remove(access);
 //                System.out.println(access);
