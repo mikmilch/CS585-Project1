@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fee0956f-0d24-4e3f-9071-cd8ad824b6c9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="fee0956f-0d24-4e3f-9071-cd8ad824b6c9" name="Changes" comment="First part of taskB should now work.">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskH.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskA/Final/.part-r-00000.crc" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/taskA/Final/.part-r-00000.crc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskA/Final/part-r-00000" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/taskA/Final/part-r-00000" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Final/.part-r-00000.crc" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/taskC/Final/.part-r-00000.crc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Final/part-r-00000" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/taskC/Final/part-r-00000" afterDir="false" />
     </list>
     <list id="e4542962-d385-4522-8772-90110580e571" name="Changes by madel" comment="" />
     <list id="38587c85-cb04-4adf-85a5-008dbeeafd8e" name="Changes by mikaelamilch" comment="" />
@@ -40,7 +49,7 @@
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="21a0d334-a217-4a4c-97d2-4e6d7eb0dbab" />
+        <option name="accountId" value="34e30e32-124e-4a2f-9100-f674f00a06db" />
         <option name="url" value="https://github.com/mikmilch/CS585-Project1.git" />
       </UrlAndAccount>
     </option>
@@ -56,28 +65,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "1.8",
-    "last_opened_file_path": "C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/pom.xml",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;taskH&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/pom.xml&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1\src" />
@@ -86,7 +95,7 @@
       <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1\output" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Application.TaskH">
     <configuration default="true" type="docs" factoryName="Docutils task">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -135,15 +144,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TaskD" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TaskD" />
+    <configuration name="TaskE" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TaskE" />
       <module name="Project1" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TaskE" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TaskE" />
+    <configuration name="TaskH" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TaskH" />
       <module name="Project1" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -175,19 +184,6 @@
       <option name="MAIN_CLASS_NAME" value="TaskaTest" />
       <option name="METHOD_NAME" value="debug" />
       <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="Project1" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="Project1" />
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -274,6 +270,14 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.TaskH" />
+        <item itemvalue="Application.TaskE" />
+        <item itemvalue="Application.TaskC" />
+        <item itemvalue="Application.TaskA" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -288,6 +292,7 @@
       <workItem from="1695677585428" duration="30000" />
       <workItem from="1695677637285" duration="179000" />
       <workItem from="1695677954536" duration="160000" />
+      <workItem from="1695680187238" duration="1400000" />
     </task>
     <task id="LOCAL-00001" summary="First part of taskB should now work.">
       <option name="closed" value="true" />
@@ -317,6 +322,21 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First part of taskB should now work." />
     <option name="LAST_COMMIT_MESSAGE" value="First part of taskB should now work." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/Project1/src/main/java/TaskA.java</url>
+          <line>43</line>
+          <properties class="TaskA" method="main">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CS585_Project1$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1695218266658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Project1/src/main/python" />
