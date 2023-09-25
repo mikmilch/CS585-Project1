@@ -20,12 +20,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class TaskD {
 
+//    Maps relationships between two users
     public static class Map extends Mapper<Object, Text, Text, IntWritable> {
 
         private Text user1 = new Text();
@@ -111,8 +113,11 @@ public class TaskD {
         private ArrayList<Text> countList = new ArrayList<Text>();
         private ArrayList<Text> faceInList = new ArrayList<Text>();
 
-        private Text test1 = new Text();
-        private Text test2 = new Text();
+        private String joinType = null;
+        
+        public void setup(Context context){
+            joinType = context.getConfiguration().get("join.type");
+        }
 
         public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
 
@@ -130,68 +135,190 @@ public class TaskD {
                 }
             }
 
+            executeJoinLogic(context);
+        }
+        
+        private void executeJoinLogic(Context context) throws IOException, InterruptedException {
 
+            if (joinType.equals("inner")) {
+                for (Text F : faceInList) {
 
-            for (Text F : faceInList){
-
-                if (countList.size() == 0){
-                    context.write(F, new Text("0"));
-                }
-                else {
-                    for (Text C : countList) {
+                    if (countList.size() == 0) {
+                        context.write(F, new Text("0"));
+                    } else {
+                        for (Text C : countList) {
 //                        System.out.println("F: " + F + ", C: " + C);
-                        context.write(F, C);
+                            context.write(F, C);
+                        }
                     }
-                }
 
+                }
             }
         }
     }
 
+    public static class MapJoin extends Mapper<Object, Text, Text, Text> {
 
-    public static void main(String[] args) throws Exception {
+        private HashMap<String, String> relationMap = new HashMap<>();
 
+        private Text outvalue = new Text();
+
+        @Override
+        protected void setup(Context context) throws IOException, InterruptedException{
+            System.out.println("1");
+            URI[] cacheFiles = context.getCacheFiles();
+            Path path = new Path(cacheFiles[0]);
+
+
+            FileSystem fs = FileSystem.get(context.getConfiguration());
+            System.out.println(path);
+            FSDataInputStream fis = fs.open(path);
+            System.out.println(fis);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fis, "UTF-8"));
+
+//            System.out.println(reader.lines().count());
+//            int lines = (int) reader.lines().count();
+
+            String line;
+
+            System.out.println(reader.readLine());
+            System.out.println(reader.readLine());
+            System.out.println(reader.readLine());
+            System.out.println(reader.readLine());
+            while ((line = reader.readLine()) != null){
+//            for (int i = 0 ; i < 200; i++) {
+//                line = reader.readLine();
+
+                System.out.println(line);
+                String[] split = line.split(" ");
+                relationMap.put(split[0], split[1]);
+            }
+
+            IOUtils.closeStream(reader);
+        }
+
+        public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+
+            System.out.println("Test");
+
+            String line = value.toString();
+
+            String[] split = line.split(",");
+
+            String relationships = relationMap.get(split[0]);
+
+            outvalue.set(relationships);
+
+            context.write(new Text(split[1]), outvalue);
+
+        }
+    }
+
+    private static void simple() throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+
+        long start = System.currentTimeMillis();
         Configuration conf = new Configuration();
-        Job job4 = Job.getInstance(conf, "Task D");
+        Job job1 = Job.getInstance(conf, "Task D");
 
-        job4.setJarByClass(TaskD.class);
-        job4.setMapperClass(TaskD.Map.class);
-        job4.setReducerClass(TaskD.Reduce.class);
+        job1.setJarByClass(TaskD.class);
+        job1.setMapperClass(TaskD.Map.class);
+        job1.setReducerClass(TaskD.Reduce.class);
 
-        job4.setOutputKeyClass(Text.class);
-        job4.setOutputValueClass(IntWritable.class);
+        job1.setOutputKeyClass(Text.class);
+        job1.setOutputValueClass(IntWritable.class);
 
         String input = "hdfs://localhost:9000/Project1/Testing/associatesTest.csv";
 //        String input = "file:///C:/Users/nickl/OneDrive/Desktop/data/Testing/tested.csv";
         String output = "file:///C:/Users/nickl/OneDrive/Desktop/output";
+//                "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskD/count";
 
-        FileInputFormat.addInputPath(job4, new Path(input));
-        FileOutputFormat.setOutputPath(job4, new Path(output));
-        job4.waitForCompletion(true);
+        FileInputFormat.addInputPath(job1, new Path(input));
+        FileOutputFormat.setOutputPath(job1, new Path(output));
+        job1.waitForCompletion(true);
 
 
         Configuration conf2 = new Configuration();
-        Job job = Job.getInstance(conf2, "Task D1");
+        Job job2 = Job.getInstance(conf2, "Task D1");
 
-        job.setJarByClass(TaskD.class);
+        job2.setJarByClass(TaskD.class);
+//
+        String input1 = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
+        String output1 = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskD/Final";
+//
+        MultipleInputs.addInputPath(job2,new Path(output),TextInputFormat.class,AssociatesMap.class);
+        MultipleInputs.addInputPath(job2, new Path(input1), TextInputFormat.class, FaceInMap.class);
+
+        job2.getConfiguration().set("join.type", "inner");
+
+
+        job2.setReducerClass(JoinReduce.class);
+        job2.setOutputKeyClass(Text.class);
+        job2.setOutputValueClass(Text.class);
+
+        FileOutputFormat.setOutputPath(job2, new Path(output1));
+        job2.waitForCompletion(true);
+        long end = System.currentTimeMillis();
+        long timeTaken = end - start;
+        System.out.println("Time Taken: " + timeTaken);
+    }
+
+    private static void advanced() throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+
+        long start = System.currentTimeMillis();
+        Configuration conf = new Configuration();
+        Job job1 = Job.getInstance(conf, "Task D");
+
+        job1.setJarByClass(TaskD.class);
+        job1.setMapperClass(TaskD.Map.class);
+        job1.setReducerClass(TaskD.Reduce.class);
+
+        job1.setOutputKeyClass(Text.class);
+        job1.setOutputValueClass(IntWritable.class);
+
+        String input = "hdfs://localhost:9000/Project1/Testing/associatesTest.csv";
+//        String input = "file:///C:/Users/nickl/OneDrive/Desktop/data/Testing/tested.csv";
+        String output = "file:///C:/Users/nickl/OneDrive/Desktop/output";
+//                "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskD/count";
+
+        FileInputFormat.addInputPath(job1, new Path(input));
+        FileOutputFormat.setOutputPath(job1, new Path(output));
+        job1.waitForCompletion(true);
+
+
+        Configuration conf3 = new Configuration();
+        Job job3 = Job.getInstance(conf3, "Map Side Join");
+
+        job3.setJarByClass(TaskD.class);
+        job3.setMapperClass(MapJoin.class);
+
+        job3.setMapOutputKeyClass(Text.class);
+        job3.setMapOutputValueClass(Text.class);
+        job3.setOutputKeyClass(Text.class);
+        job3.setOutputValueClass(Text.class);
+
+        job3.addCacheFile(new URI(output + "/part-r-00000"));
+
+        job3.setNumReduceTasks(0);
 
         String input1 = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
-        String output1 = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output2";
+        String output1 = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskD/Final";
 
-        MultipleInputs.addInputPath(job,
-                new Path(output),
-                TextInputFormat.class,
-                AssociatesMap.class);
-        MultipleInputs.addInputPath(job, new Path(input1), TextInputFormat.class,
-                FaceInMap.class);
+        FileInputFormat.addInputPath(job3, new Path(input1));
+        FileOutputFormat.setOutputPath(job3, new Path(output1));
+        job3.waitForCompletion(true);
+//        System.exit(job3.waitForCompletion(true) ? 0 : 1);
+    }
 
 
-        job.setReducerClass(JoinReduce.class);
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(Text.class);
 
-        FileOutputFormat.setOutputPath(job, new Path(output1));
-        System.exit(job.waitForCompletion(true) ? 0 : 1);
+    public static void main(String[] args) throws IOException, URISyntaxException,
+    ClassNotFoundException, InterruptedException{
+
+
+//        simple();
+
+        advanced();
 
     }
 }

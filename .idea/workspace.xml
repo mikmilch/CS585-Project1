@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fee0956f-0d24-4e3f-9071-cd8ad824b6c9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Project1/src/Test/java/TaskDClass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/output/taskE/Final/._SUCCESS.crc" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/output/taskE/Final/.part-r-00000.crc" beforeDir="false" />
@@ -19,8 +19,42 @@
       <change beforePath="$PROJECT_DIR$/Project1/output/taskE/total/.part-r-00000.crc" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/output/taskE/total/_SUCCESS" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/output/taskE/total/part-r-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output2/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output2/.part-r-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output2/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output2/part-r-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/src/Test/java/TaskaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/Test/java/TaskaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskC.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskE.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskE.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/faker/providers/address/de_DE/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/faker/providers/address/de_DE/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/faker/providers/person/et_EE/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/faker/providers/person/et_EE/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/numpy/core/fromnumeric.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/numpy/core/fromnumeric.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/numpy/f2py/crackfortran.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/numpy/f2py/crackfortran.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/numpy/linalg/linalg.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/numpy/linalg/linalg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/pandas-2.1.0.dist-info/METADATA" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/pandas-2.1.0.dist-info/METADATA" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/pandas/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/pandas/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/pandas/io/json/_normalize.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/pandas/io/json/_normalize.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/pandas/tests/indexing/multiindex/test_loc.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/pandas/tests/indexing/multiindex/test_loc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/pip/_vendor/platformdirs/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/pip/_vendor/platformdirs/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/pip/_vendor/pygments/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/pip/_vendor/pygments/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/pip/_vendor/pygments/cmdline.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/pip/_vendor/pygments/cmdline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/setuptools/command/build_ext.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/venv/lib/python3.9/site-packages/setuptools/command/build_ext.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main$TestReducer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main$testMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskC$Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskC$Map.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskC$Reduce.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskC$Reduce.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskC.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskC.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskD$AssociatesMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskD$AssociatesMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskD$FaceInMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskD$FaceInMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskD$JoinReduce.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskD$JoinReduce.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskD$Map.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskD$Map.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskD$Reduce.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskD$Reduce.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$JoinReduce.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$JoinReduce.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskE.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE.class" afterDir="false" />
     </list>
     <list id="e4542962-d385-4522-8772-90110580e571" name="Changes by madel" comment="" />
     <list id="38587c85-cb04-4adf-85a5-008dbeeafd8e" name="Changes by mikaelamilch" comment="" />
@@ -61,8 +95,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "taskE",
-    "last_opened_file_path": "C:/Users/nickl/OneDrive/Desktop/data/Testing/associatesTest.csv",
+    "git-widget-placeholder": "refactor2",
+    "last_opened_file_path": "C:/Users/nickl/Downloads/Project1_Mikmilch/Project1_Mikmilch",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -80,7 +114,7 @@
       <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TaskE">
+  <component name="RunManager" selected="Application.TaskC">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -213,6 +247,20 @@
       <option name="USE_PATTERN" value="false" />
       <method v="2" />
     </configuration>
+    <configuration name="TaskA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TaskA" />
+      <module name="Project1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskC" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TaskC" />
+      <module name="Project1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TaskD" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TaskD" />
       <module name="Project1" />
@@ -273,27 +321,12 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest in main.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="CS585-Project1" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Project1" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_parameters" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/Project1/main.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TaskE" />
+        <item itemvalue="Application.TaskC" />
         <item itemvalue="Application.TaskD" />
+        <item itemvalue="Application.TaskA" />
+        <item itemvalue="Application.TaskE" />
         <item itemvalue="JUnit.TaskaTest.debug" />
       </list>
     </recent_temporary>
@@ -348,13 +381,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Project1/src/main/java/TaskD.java</url>
-          <line>172</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Project1/src/main/java/TaskD.java</url>
-          <line>134</line>
-          <option name="timeStamp" value="6" />
+          <line>189</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

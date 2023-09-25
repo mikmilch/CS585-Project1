@@ -173,7 +173,11 @@ public class TaskE {
         private ArrayList<Text> faceInList = new ArrayList<Text>();
 
         private Text outvalue = new Text();
-        private Text test2 = new Text();
+
+        private String joinType = null;
+        public void setup(Context context){
+            joinType = context.getConfiguration().get("join.type");
+        }
 
         public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
 
@@ -194,9 +198,10 @@ public class TaskE {
                     distinctList.add(new Text(test.toString().substring(1)));
                 }
             }
+            executeJoinLogic(context);
+        }
 
-
-
+        private void executeJoinLogic(Context context) throws IOException, InterruptedException {
             for (Text F : faceInList){
 
                 if (totalList.size() == 0){
