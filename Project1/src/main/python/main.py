@@ -61,7 +61,7 @@ def FaceInPage():
     face_in_page['Nationality'] = [nationalities_array[random.randint(0, 224)][0] for i in range(num_users)]
 
     # generating country code
-    face_in_page['CountryCode'] = [random.randint(0, 50) for i in range(num_users)]
+    face_in_page['CountryCode'] = [random.randint(1, 50) for i in range(num_users)]
 
     # generating hobbies
     hobbies = pd.read_csv("hobbylist.csv", usecols=["Hobby-name"])
@@ -70,7 +70,7 @@ def FaceInPage():
 
     face_in_page.to_csv("faceInPageTest.csv", index=False)
 
-relMap = {}
+rel = []
 alist = []
 blist = []
 
@@ -82,7 +82,7 @@ def Associates():
     # Generate Person A ID
     # Generate Person B ID
     for i in range(relations):
-        (check(random.randint(0, len(face_in_page)), random.randint(0, len(face_in_page))))
+        (check(random.randint(1, len(face_in_page)), random.randint(1, len(face_in_page))))
 
     associates['PersonA_ID'] = alist
     associates['PersonB_ID'] = blist
@@ -102,13 +102,14 @@ def Associates():
 # Method to help check for relations that already exist, if so then regenerate both
 def check(currentA, currentB):
     # print(currentA)
-    if relMap.get(currentA) == currentB or relMap.get(currentA) == currentB:
-        new_A = random.randint(0, len(face_in_page))
-        new_B = random.randint(0, len(face_in_page))
+
+    if str(currentA) + " " + str(currentB) in rel or str(currentB) + " " + str(currentA) in rel or currentB == currentA:
+        new_A = random.randint(1, len(face_in_page))
+        new_B = random.randint(1, len(face_in_page))
         check(new_A, new_B)
     else:
-        relMap[currentB] = currentA
-        relMap[currentA] = currentB
+        rel.append(str(currentA) + " " + str(currentB))
+        rel.append(str(currentB) + " " + str(currentA))
         alist.append(currentA)
         blist.append(currentB)
 
@@ -129,8 +130,8 @@ def Access_logs():
     # access_logs['ByWho'] = [random.randint(0, len(face_in_page) - 1)
 
     for i in range(accesses):
-        bywho = random.randint(0, len(face_in_page))
-        whatpage = random.randint(0, len(face_in_page))
+        bywho = random.randint(1, len(face_in_page))
+        whatpage = random.randint(1, len(face_in_page))
 
         if (check_dups(bywho, whatpage)):
             whatpage = random.randint(0, len(face_in_page))
