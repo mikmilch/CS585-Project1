@@ -186,7 +186,7 @@ public class TaskD {
             System.out.println(reader.readLine());
             System.out.println(reader.readLine());
             System.out.println(reader.readLine());
-            while ((line = reader.readLine()) != null){
+            while (StringUtils.isNotEmpty(line = reader.readLine())){
 //            for (int i = 0 ; i < 200; i++) {
 //                line = reader.readLine();
 
@@ -222,8 +222,8 @@ public class TaskD {
         Job job1 = Job.getInstance(conf, "Task D");
 
         job1.setJarByClass(TaskD.class);
-        job1.setMapperClass(TaskD.Map.class);
-        job1.setReducerClass(TaskD.Reduce.class);
+        job1.setMapperClass(Map.class);
+        job1.setReducerClass(Reduce.class);
 
         job1.setOutputKeyClass(Text.class);
         job1.setOutputValueClass(IntWritable.class);

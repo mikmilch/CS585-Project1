@@ -7,7 +7,7 @@ import datetime
 # https://towardsdatascience.com/build-a-your-own-custom-dataset-using-python-9296540a0178 source
 
 # FaceInPage
-num_users = 200#200000
+num_users = 200000#200
 
 features = [
     "ID",
@@ -19,7 +19,7 @@ features = [
 face_in_page = pd.DataFrame(columns=features)
 
 # Associates
-relations = 2000 #20000000
+relations = 20000000#2000
 
 associates_features = [
     'FriendRel',
@@ -32,7 +32,7 @@ associates_features = [
 
 associates = pd.DataFrame(columns=associates_features)
 
-accesses = 1000 #10000000
+accesses = 10000000#1000
 
 access_features = [
     'AccessID',
@@ -61,7 +61,7 @@ def FaceInPage():
     face_in_page['Nationality'] = [nationalities_array[random.randint(0, 224)][0] for i in range(num_users)]
 
     # generating country code
-    face_in_page['CountryCode'] = [random.randint(0, 50) for i in range(num_users)]
+    face_in_page['CountryCode'] = [random.randint(1, 50) for i in range(num_users)]
 
     # generating hobbies
     hobbies = pd.read_csv("hobbylist.csv", usecols=["Hobby-name"])
@@ -70,7 +70,8 @@ def FaceInPage():
 
     face_in_page.to_csv("faceInPageTest.csv", index=False)
 
-relMap = {}
+# relMap = {}
+rel = []
 alist = []
 blist = []
 
@@ -82,7 +83,7 @@ def Associates():
     # Generate Person A ID
     # Generate Person B ID
     for i in range(relations):
-        (check(random.randint(0, len(face_in_page)), random.randint(0, len(face_in_page))))
+        (check(random.randint(1, len(face_in_page)), random.randint(1, len(face_in_page))))
 
     associates['PersonA_ID'] = alist
     associates['PersonB_ID'] = blist
@@ -102,15 +103,28 @@ def Associates():
 # Method to help check for relations that already exist, if so then regenerate both
 def check(currentA, currentB):
     # print(currentA)
-    if relMap.get(currentA) == currentB or relMap.get(currentA) == currentB:
-        new_A = random.randint(0, len(face_in_page))
-        new_B = random.randint(0, len(face_in_page))
+
+    if ((str(currentA) + " " + str(currentB)) in rel) or ((str(currentB) + " " + str(currentA)) in rel) or currentA == currentB:
+        new_A = random.randint(1, len(face_in_page))
+        new_B = random.randint(1, len(face_in_page))
         check(new_A, new_B)
     else:
-        relMap[currentB] = currentA
-        relMap[currentA] = currentB
+        rel.append((str(currentA) + " " + str(currentB)))
+        rel.append((str(currentB) + " " + str(currentA)))
+        print(len(rel))
         alist.append(currentA)
         blist.append(currentB)
+    # if relMap.get(currentA) == currentB or relMap.get(currentB) == currentA:
+    #     # print(str(currentA) + " " + str(currentB))
+    #     new_A = random.randint(0, len(face_in_page))
+    #     new_B = random.randint(0, len(face_in_page))
+    #     check(new_A, new_B)
+    # else:
+    #     relMap[currentB] = currentA
+    #     relMap[currentA] = currentB
+    #     print(len(relMap))
+    #     alist.append(currentA)
+    #     blist.append(currentB)
 
 
 def check_dups(bywho, whatpage):
@@ -129,11 +143,11 @@ def Access_logs():
     # access_logs['ByWho'] = [random.randint(0, len(face_in_page) - 1)
 
     for i in range(accesses):
-        bywho = random.randint(0, len(face_in_page))
-        whatpage = random.randint(0, len(face_in_page))
+        bywho = random.randint(1, len(face_in_page))
+        whatpage = random.randint(1, len(face_in_page))
 
         if (check_dups(bywho, whatpage)):
-            whatpage = random.randint(0, len(face_in_page))
+            whatpage = random.randint(1, len(face_in_page))
 
         by_who_list.append(bywho)
         what_page_list.append(whatpage)
@@ -159,5 +173,6 @@ if __name__ == '__main__':
     FaceInPage()
     Associates()
     Access_logs()
+    # print(len(relMap))
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
