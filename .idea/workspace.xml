@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fee0956f-0d24-4e3f-9071-cd8ad824b6c9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Advanced/Final/._SUCCESS.crc" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Advanced/Final/.part-r-00000.crc" beforeDir="false" />
@@ -23,9 +22,28 @@
       <change beforePath="$PROJECT_DIR$/Project1/output/taskD/Final/Simple/.part-r-00000.crc" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/output/taskD/Final/Simple/_SUCCESS" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/output/taskD/Final/Simple/part-r-00000" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskE/Final/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskE/Final/.part-r-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskE/Final/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskE/Final/part-r-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskE/distinct/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskE/distinct/.part-r-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskE/distinct/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskE/distinct/part-r-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskE/total/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskE/total/.part-r-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskE/total/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskE/total/part-r-00000" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskE.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskE.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TaskD$MapJoin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskD$MapJoin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$DistinctJoinMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$DistinctJoinMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$DistinctMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$DistinctMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$DistinctReduce.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$DistinctReduce.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$FaceInMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$FaceInMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$JoinReduce.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$JoinReduce.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$TotalJoinMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$TotalJoinMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$TotalMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$TotalMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$TotalReduce.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$TotalReduce.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskE.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE.class" afterDir="false" />
     </list>
     <list id="e4542962-d385-4522-8772-90110580e571" name="Changes by madel" comment="" />
     <list id="38587c85-cb04-4adf-85a5-008dbeeafd8e" name="Changes by mikaelamilch" comment="" />
@@ -85,7 +103,7 @@
       <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TaskC">
+  <component name="RunManager" selected="Application.TaskE">
     <configuration default="true" type="docs" factoryName="Docutils task">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -277,9 +295,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TaskC" />
-        <item itemvalue="Application.TaskD" />
         <item itemvalue="Application.TaskE" />
+        <item itemvalue="Application.TaskD" />
+        <item itemvalue="Application.TaskC" />
         <item itemvalue="Application.TaskF" />
         <item itemvalue="Application.TaskA" />
       </list>
@@ -337,6 +355,15 @@
           <url>file://$PROJECT_DIR$/Project1/src/main/java/TaskF.java</url>
           <line>73</line>
           <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/Project1/src/main/java/TaskC.java</url>
+          <line>116</line>
+          <properties class="TaskC" method="main">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
