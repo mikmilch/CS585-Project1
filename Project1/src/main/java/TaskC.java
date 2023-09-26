@@ -57,7 +57,7 @@ public class TaskC {
         }
     }
 
-    private static void simple() throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+    private static void simple(String input, String output) throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
 
 
         long start = System.currentTimeMillis();
@@ -72,10 +72,6 @@ public class TaskC {
         job1.setOutputKeyClass(Text.class);
         job1.setOutputValueClass(IntWritable.class);
 
-        String input = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
-        String hdfsOutput = "hdfs://localhost:9000/Project1/Output/TaskC/Simple";
-        String output = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskC/Simple/Final";
-
         FileInputFormat.addInputPath(job1, new Path(input));
         FileOutputFormat.setOutputPath(job1, new Path(output));
         job1.waitForCompletion(true);
@@ -85,7 +81,7 @@ public class TaskC {
         System.out.println("Simple Time Taken: " + timeTaken);
     }
 
-    private static void advanced() throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+    private static void advanced(String input, String output) throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
 
 
         long start = System.currentTimeMillis();
@@ -100,10 +96,6 @@ public class TaskC {
 
         job1.setOutputKeyClass(Text.class);
         job1.setOutputValueClass(IntWritable.class);
-
-        String input = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
-        String hdfsOutput = "hdfs://localhost:9000/Project1/Output/TaskC/Advanced";
-        String output = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskC/Advanced/Final";
 
         FileInputFormat.addInputPath(job1, new Path(input));
         FileOutputFormat.setOutputPath(job1, new Path(output));
@@ -120,8 +112,41 @@ public class TaskC {
 
 //        Job Driver
 
+        String inputTest = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
+        String input = "hdfs://localhost:9000/Project1/Final/faceInPage.csv";
 
-        simple();
-        advanced();
+        String hdfsAdvancedOutputTest = "hdfs://localhost:9000/Project1/Output/TaskC/Test/Advanced";
+        String hdfsAdvancedOutput = "hdfs://localhost:9000/Project1/Output/TaskC/Final/Advanced";
+        String hdfsSimpleOutputTest = "hdfs://localhost:9000/Project1/Output/TaskC/Test/Simple";
+        String hdfsSimpleOutput = "hdfs://localhost:9000/Project1/Output/TaskC/Final/Simple";
+
+        String outputAdvancedTest = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/TaskC/Test/Advanced";
+        String outputAdvanced = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/TaskC/Final/Advanced";
+        String outputSimpleTest = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/TaskC/Test/Simple";
+        String outputSimple = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/TaskC/Final/Simple";
+
+
+        System.out.println("Now Running Simple Methods");
+
+        System.out.println("Running Test Files");
+        simple(inputTest, hdfsSimpleOutputTest);
+        simple(inputTest, outputSimpleTest);
+
+        System.out.println("Running Actual Files");
+        simple(input, hdfsSimpleOutput);
+        simple(input, outputSimple);
+
+
+        System.out.println("Now Running Advanced Methods");
+
+        System.out.println("Running Test Files");
+        advanced(inputTest, hdfsAdvancedOutputTest);
+        advanced(inputTest, outputAdvancedTest);
+
+
+        System.out.println("Running Actual Files");
+        advanced(input, hdfsAdvancedOutput);
+        advanced(input, outputAdvanced);
+
     }
 }

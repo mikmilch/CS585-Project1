@@ -34,6 +34,7 @@ public class TaskE {
             // Split by Column
             String[] split = line.split(",");
 
+//            System.out.println(split[0]);
             user.set(split[1]); // Key = User
             context.write(user, ones); // Write <key, value> = <User, 1>
         }
@@ -245,7 +246,7 @@ public class TaskE {
         }
     }
 
-    private static void simple() throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+    private static void simple(String input, String input1, String tempOutput, String tempOutput1, String output) throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
         long start = System.currentTimeMillis();
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf, "Get Total Access By Each User");
@@ -257,12 +258,9 @@ public class TaskE {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
 
-        String input = "hdfs://localhost:9000/Project1/Testing/accessLogsTest.csv";
-//        "file:///C:/Users/nickl/OneDrive/Desktop/data/Testing/accessTesting.csv";
-        String output = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskE/Final/Simple/Total";
 
         FileInputFormat.addInputPath(job, new Path(input));
-        FileOutputFormat.setOutputPath(job, new Path(output));
+        FileOutputFormat.setOutputPath(job, new Path(tempOutput));
         job.waitForCompletion(true);
 
 
@@ -278,38 +276,34 @@ public class TaskE {
         job1.setOutputKeyClass(Text.class);
         job1.setOutputValueClass(IntWritable.class);
 
-        String output1 = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskE/Final/Simple/Distinct";
 
         FileInputFormat.addInputPath(job1, new Path(input));
-        FileOutputFormat.setOutputPath(job1, new Path(output1));
+        FileOutputFormat.setOutputPath(job1, new Path(tempOutput1));
         job1.waitForCompletion(true);
 
 
 
         Configuration conf2 = new Configuration();
         Job job2 = Job.getInstance(conf2, "Join");
-
-        String input1 = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
-        String output2 = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskE/Final/Simple/Final";
-
+        
 
         job2.setJarByClass(TaskE.class);
-        MultipleInputs.addInputPath(job2,new Path(output),TextInputFormat.class,TotalJoinMap.class);
-        MultipleInputs.addInputPath(job2,new Path(output1),TextInputFormat.class,DistinctJoinMap.class);
+        MultipleInputs.addInputPath(job2,new Path(tempOutput),TextInputFormat.class,TotalJoinMap.class);
+        MultipleInputs.addInputPath(job2,new Path(tempOutput1),TextInputFormat.class,DistinctJoinMap.class);
         MultipleInputs.addInputPath(job2, new Path(input1), TextInputFormat.class,FaceInMap.class);
 
         job2.setReducerClass(JoinReduce.class);
         job2.setOutputKeyClass(Text.class);
         job2.setOutputValueClass(Text.class);
 
-        FileOutputFormat.setOutputPath(job2, new Path(output2));
+        FileOutputFormat.setOutputPath(job2, new Path(output));
         job2.waitForCompletion(true);
         long end = System.currentTimeMillis();
         long timeTaken = end - start;
         System.out.println("Simple Approach Time Taken: " + timeTaken);
     }
 
-    private static void advanced() throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+    private static void advanced(String input, String input1, String tempOutput, String tempOutput1, String output) throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
         long start = System.currentTimeMillis();
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf, "Get Total Access By Each User");
@@ -322,12 +316,9 @@ public class TaskE {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
 
-        String input = "hdfs://localhost:9000/Project1/Testing/accessLogsTest.csv";
-//        "file:///C:/Users/nickl/OneDrive/Desktop/data/Testing/accessTesting.csv";
-        String output = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskE/Final/Advanced/Total";
 
         FileInputFormat.addInputPath(job, new Path(input));
-        FileOutputFormat.setOutputPath(job, new Path(output));
+        FileOutputFormat.setOutputPath(job, new Path(tempOutput));
         job.waitForCompletion(true);
 
 
@@ -343,42 +334,68 @@ public class TaskE {
         job1.setOutputKeyClass(Text.class);
         job1.setOutputValueClass(IntWritable.class);
 
-        String output1 = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskE/Final/Advanced/distinct";
 
         FileInputFormat.addInputPath(job1, new Path(input));
-        FileOutputFormat.setOutputPath(job1, new Path(output1));
+        FileOutputFormat.setOutputPath(job1, new Path(tempOutput1));
         job1.waitForCompletion(true);
 
 
 
         Configuration conf2 = new Configuration();
         Job job2 = Job.getInstance(conf2, "Join");
-
-        String input1 = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
-        String output2 = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskE/Final/Advanced/Final";
-
+        
 
         job2.setJarByClass(TaskE.class);
-        MultipleInputs.addInputPath(job2,new Path(output),TextInputFormat.class,TotalJoinMap.class);
-        MultipleInputs.addInputPath(job2,new Path(output1),TextInputFormat.class,DistinctJoinMap.class);
+        MultipleInputs.addInputPath(job2,new Path(tempOutput),TextInputFormat.class,TotalJoinMap.class);
+        MultipleInputs.addInputPath(job2,new Path(tempOutput1),TextInputFormat.class,DistinctJoinMap.class);
         MultipleInputs.addInputPath(job2, new Path(input1), TextInputFormat.class,FaceInMap.class);
 
         job2.setReducerClass(JoinReduce.class);
         job2.setOutputKeyClass(Text.class);
         job2.setOutputValueClass(Text.class);
 
-        FileOutputFormat.setOutputPath(job2, new Path(output2));
+        FileOutputFormat.setOutputPath(job2, new Path(output));
         job2.waitForCompletion(true);
         long end = System.currentTimeMillis();
         long timeTaken = end - start;
         System.out.println("Advanced Approach Time Taken: " + timeTaken);
     }
 
-        public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
 
-        simple();
+        String inputFaceInPageTest = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
+        String inputFaceInPage = "hdfs://localhost:9000/Project1/Final/faceInPage.csv";
+        String inputAccessLogsTest = "hdfs://localhost:9000/Project1/Testing/accessLogsTest.csv";
+        String inputAccessLogs = "hdfs://localhost:9000/Project1/Final/accessLogs.csv";
 
-        advanced();
+        String hdfsAdvancedOutputTest = "hdfs://localhost:9000/Project1/Output/TaskE/Test/Advanced";
+        String hdfsAdvancedOutput = "hdfs://localhost:9000/Project1/Output/TaskE/Final/Advanced";
+        String hdfsSimpleOutputTest = "hdfs://localhost:9000/Project1/Output/TaskE/Test/Simple";
+        String hdfsSimpleOutput = "hdfs://localhost:9000/Project1/Output/TaskE/Final/Simple";
+
+        String hdfsTempAdvancedOutputTest = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Test/Advanced/0";
+        String hdfsTempAdvancedOutput = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Advanced/0";
+        String hdfsTempSimpleOutputTest = "hdfs://localhost:9000/Project1/Output/TaskE/Test/Temp/Simple/0";
+        String hdfsTempSimpleOutput = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Simple/0";
+        String hdfsTempAdvancedOutputTest1 = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Test/Advanced/1";
+        String hdfsTempAdvancedOutput1 = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Advanced/1";
+        String hdfsTempSimpleOutputTest1 = "hdfs://localhost:9000/Project1/Output/TaskE/Test/Temp/Simple/1";
+        String hdfsTempSimpleOutput1 = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Simple/1";
+
+
+        System.out.println("Now Running Simple Methods\n");
+
+        System.out.println("Running Test Files");
+        simple(inputAccessLogsTest, inputFaceInPageTest, hdfsTempSimpleOutputTest, hdfsTempSimpleOutputTest1, hdfsSimpleOutputTest);
+        System.out.println("\nRunning Actual Files");
+//        simple(inputAccessLogs, inputFaceInPage, hdfsTempSimpleOutput, hdfsTempSimpleOutput1, hdfsSimpleOutput);
+
+        System.out.println("\nNow Running Advanced Methods\n");
+
+        System.out.println("Running Test Files");
+        advanced(inputAccessLogsTest, inputFaceInPageTest, hdfsTempAdvancedOutputTest, hdfsTempAdvancedOutputTest1, hdfsAdvancedOutputTest);
+        System.out.println("\nRunning Actual Files");
+//        advanced(inputAccessLogs, inputFaceInPage, hdfsTempAdvancedOutput, hdfsTempAdvancedOutput1, hdfsAdvancedOutput);
 
     }
     

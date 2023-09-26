@@ -103,7 +103,7 @@ public class TaskF {
     }
 
 
-    private static void simple() throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+    private static void simple(String associatesInput, String accessInput, String output) throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
 
         long start = System.currentTimeMillis();
 
@@ -112,14 +112,7 @@ public class TaskF {
         Job job1 = Job.getInstance(conf, "Test");
 
         job1.setJarByClass(TaskF.class);
-//        job1.setMapperClass(AssociatesMap.class);
 
-
-        String associatesInput = "hdfs://localhost:9000/Project1/Testing/associatesTest.csv";
-        String accessInput = "hdfs://localhost:9000/Project1/Testing/accessLogsTest.csv";
-//        String input = "file:///C:/Users/nickl/OneDrive/Desktop/data/Testing/tested.csv";
-        String output = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskF";
-//                "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskD/count";
 
         MultipleInputs.addInputPath(job1,new Path(associatesInput), TextInputFormat.class, AssociatesMap.class);
         MultipleInputs.addInputPath(job1, new Path(accessInput), TextInputFormat.class, AccessMap.class);
@@ -130,7 +123,6 @@ public class TaskF {
         job1.setOutputValueClass(Text.class);
 
 
-//        FileInputFormat.addInputPath(job1, new Path(associatesInput));
         FileOutputFormat.setOutputPath(job1, new Path(output));
         job1.waitForCompletion(true);
 
@@ -139,9 +131,23 @@ public class TaskF {
         System.out.println("Simple Approach Time Taken: " + timeTaken);
     }
 
-        public static void main(String[] args) throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+    public static void main(String[] args) throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
 
-            simple();
+        String inputAssociatesTest = "hdfs://localhost:9000/Project1/Testing/associatesTest.csv";
+        String inputAssociates = "hdfs://localhost:9000/Project1/Final/associates.csv";
+        String inputAccessLogsTest = "hdfs://localhost:9000/Project1/Testing/accessLogsTest.csv";
+        String inputAccessLogs = "hdfs://localhost:9000/Project1/Final/accessLogs.csv";
+
+        String hdfsSimpleOutputTest = "hdfs://localhost:9000/Project1/Output/TaskF/Test/Simple";
+        String hdfsSimpleOutput = "hdfs://localhost:9000/Project1/Output/TaskF/Final/Simple";
+
+
+        System.out.println("Now Running Simple Methods\n");
+
+        System.out.println("Running Test Files");
+        simple(inputAssociatesTest, inputAccessLogsTest, hdfsSimpleOutputTest);
+        System.out.println("\nRunning Actual Files");
+        simple(inputAssociates, inputAccessLogs, hdfsSimpleOutput);
     }
 }
 

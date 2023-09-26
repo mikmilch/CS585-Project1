@@ -230,7 +230,7 @@ public class TaskD {
         }
     }
 
-    private static void simple() throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+    private static void simple(String input, String input1, String tempOutput, String output) throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
 
         long start = System.currentTimeMillis();
         Configuration conf = new Configuration();
@@ -243,13 +243,8 @@ public class TaskD {
         job1.setOutputKeyClass(Text.class);
         job1.setOutputValueClass(IntWritable.class);
 
-        String input = "hdfs://localhost:9000/Project1/Testing/associatesTest.csv";
-//        String input = "file:///C:/Users/nickl/OneDrive/Desktop/data/Testing/tested.csv";
-        String output = "file:///C:/Users/nickl/OneDrive/Desktop/output/taskD/Simple";
-//                "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskD/count";
-
         FileInputFormat.addInputPath(job1, new Path(input));
-        FileOutputFormat.setOutputPath(job1, new Path(output));
+        FileOutputFormat.setOutputPath(job1, new Path(tempOutput));
         job1.waitForCompletion(true);
 
 
@@ -258,10 +253,8 @@ public class TaskD {
 
         job2.setJarByClass(TaskD.class);
 //
-        String input1 = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
-        String output1 = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskD/Final/Simple";
 //
-        MultipleInputs.addInputPath(job2,new Path(output),TextInputFormat.class,AssociatesMap.class);
+        MultipleInputs.addInputPath(job2,new Path(tempOutput),TextInputFormat.class,AssociatesMap.class);
         MultipleInputs.addInputPath(job2, new Path(input1), TextInputFormat.class, FaceInMap.class);
 
         job2.getConfiguration().set("join.type", "inner");
@@ -271,14 +264,14 @@ public class TaskD {
         job2.setOutputKeyClass(Text.class);
         job2.setOutputValueClass(Text.class);
 
-        FileOutputFormat.setOutputPath(job2, new Path(output1));
+        FileOutputFormat.setOutputPath(job2, new Path(output));
         job2.waitForCompletion(true);
         long end = System.currentTimeMillis();
         long timeTaken = end - start;
         System.out.println("Simple Approach Time Taken: " + timeTaken);
     }
 
-    private static void advanced() throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+    private static void advanced(String input, String input1, String tempOutput, String output) throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
 
         long start = System.currentTimeMillis();
         Configuration conf = new Configuration();
@@ -291,13 +284,8 @@ public class TaskD {
         job1.setOutputKeyClass(Text.class);
         job1.setOutputValueClass(IntWritable.class);
 
-        String input = "hdfs://localhost:9000/Project1/Testing/associatesTest.csv";
-//        String input = "file:///C:/Users/nickl/OneDrive/Desktop/data/Testing/tested.csv";
-        String output = "file:///C:/Users/nickl/OneDrive/Desktop/output/taskD/Advanced";
-//                "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskD/count";
-
         FileInputFormat.addInputPath(job1, new Path(input));
-        FileOutputFormat.setOutputPath(job1, new Path(output));
+        FileOutputFormat.setOutputPath(job1, new Path(tempOutput));
         job1.waitForCompletion(true);
 
 
@@ -312,15 +300,12 @@ public class TaskD {
         job3.setOutputKeyClass(Text.class);
         job3.setOutputValueClass(Text.class);
 
-        job3.addCacheFile(new URI(output + "/part-r-00000"));
+        job3.addCacheFile(new URI(tempOutput + "/part-r-00000"));
 
         job3.setNumReduceTasks(0);
 
-        String input1 = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
-        String output1 = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskD/Final/Advanced";
-
         FileInputFormat.addInputPath(job3, new Path(input1));
-        FileOutputFormat.setOutputPath(job3, new Path(output1));
+        FileOutputFormat.setOutputPath(job3, new Path(output));
         job3.waitForCompletion(true);
         long end = System.currentTimeMillis();
         long timeTaken = end - start;
@@ -333,10 +318,34 @@ public class TaskD {
     public static void main(String[] args) throws IOException, URISyntaxException,
     ClassNotFoundException, InterruptedException{
 
+        String inputFaceInPageTest = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
+        String inputFaceInPage = "hdfs://localhost:9000/Project1/Final/faceInPage.csv";
+        String inputAssociatesTest = "hdfs://localhost:9000/Project1/Testing/associatesTest.csv";
+        String inputAssociates = "hdfs://localhost:9000/Project1/Final/associates.csv";
 
-        simple();
+        String hdfsAdvancedOutputTest = "hdfs://localhost:9000/Project1/Output/TaskD/Test/Advanced";
+        String hdfsAdvancedOutput = "hdfs://localhost:9000/Project1/Output/TaskD/Final/Advanced";
+        String hdfsSimpleOutputTest = "hdfs://localhost:9000/Project1/Output/TaskD/Test/Simple";
+        String hdfsSimpleOutput = "hdfs://localhost:9000/Project1/Output/TaskD/Final/Simple";
 
-        advanced();
+        String hdfsTempAdvancedOutputTest = "hdfs://localhost:9000/Project1/Output/TaskD/Temp/Test/Advanced";
+        String hdfsTempAdvancedOutput = "hdfs://localhost:9000/Project1/Output/TaskD/Temp/Final/Advanced";
+        String hdfsTempSimpleOutputTest = "hdfs://localhost:9000/Project1/Output/TaskD/Test/Temp/Simple";
+        String hdfsTempSimpleOutput = "hdfs://localhost:9000/Project1/Output/TaskD/Temp/Final/Simple";
+
+        System.out.println("Now Running Simple Methods\n");
+
+        System.out.println("Running Test Files");
+        simple(inputAssociatesTest, inputFaceInPageTest, hdfsTempSimpleOutputTest, hdfsSimpleOutputTest);
+        System.out.println("\nRunning Actual Files");
+        simple(inputAssociates, inputFaceInPage, hdfsTempSimpleOutput, hdfsSimpleOutput);
+
+        System.out.println("\nNow Running Advanced Methods\n");
+
+        System.out.println("Running Test Files");
+        advanced(inputAssociatesTest, inputFaceInPageTest, hdfsTempAdvancedOutputTest, hdfsAdvancedOutputTest);
+        System.out.println("\nRunning Actual Files");
+        advanced(inputAssociates, inputFaceInPage, hdfsTempAdvancedOutput, hdfsAdvancedOutput);
 
     }
 }

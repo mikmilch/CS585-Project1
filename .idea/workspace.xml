@@ -5,13 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fee0956f-0d24-4e3f-9071-cd8ad824b6c9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Project1/output/TaskC/Final/Advanced/.part-r-00000.crc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project1/output/TaskC/Final/Advanced/part-r-00000" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project1/output/TaskC/Final/Simple/.part-r-00000.crc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project1/output/TaskC/Final/Simple/part-r-00000" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project1/output/TaskC/Test/Advanced/._SUCCESS.crc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project1/output/TaskC/Test/Advanced/_SUCCESS" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project1/output/TaskC/Test/Simple/._SUCCESS.crc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project1/output/TaskC/Test/Simple/_SUCCESS" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project1/output/taskA/Test/._SUCCESS.crc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project1/output/taskA/Test/.part-r-00000.crc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project1/output/taskA/Test/_SUCCESS" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project1/output/taskA/Test/part-r-00000" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskF/._SUCCESS.crc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskF/.part-r-00000.crc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskF/_SUCCESS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskF/part-r-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskA/Final/.part-r-00000.crc" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/taskA/Final/.part-r-00000.crc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskA/Final/part-r-00000" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/taskA/Final/part-r-00000" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Advanced/Final/._SUCCESS.crc" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/TaskC/Final/Advanced/._SUCCESS.crc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Advanced/Final/.part-r-00000.crc" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/TaskC/Test/Advanced/.part-r-00000.crc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Advanced/Final/_SUCCESS" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/TaskC/Final/Advanced/_SUCCESS" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Advanced/Final/part-r-00000" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/TaskC/Test/Advanced/part-r-00000" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Simple/Final/._SUCCESS.crc" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/TaskC/Final/Simple/._SUCCESS.crc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Simple/Final/.part-r-00000.crc" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/TaskC/Test/Simple/.part-r-00000.crc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Simple/Final/_SUCCESS" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/TaskC/Final/Simple/_SUCCESS" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Simple/Final/part-r-00000" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/TaskC/Test/Simple/part-r-00000" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskA.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskC.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskE.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskE.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskF.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskA.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskA.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskC.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskC.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskE.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE.class" afterDir="false" />
     </list>
     <list id="e4542962-d385-4522-8772-90110580e571" name="Changes by madel" comment="" />
     <list id="38587c85-cb04-4adf-85a5-008dbeeafd8e" name="Changes by mikaelamilch" comment="" />
@@ -324,9 +349,14 @@
           <line>77</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Project1/src/main/java/TaskA.java</url>
+          <line>85</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Project1/src/main/java/TaskC.java</url>
-          <line>116</line>
+          <line>108</line>
           <properties class="TaskC" method="main">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

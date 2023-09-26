@@ -9,7 +9,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
-
+import java.net.URISyntaxException;
 
 
 public class TaskA {
@@ -40,6 +40,27 @@ public class TaskA {
         }
     }
 
+    private static void simple(String input, String output) throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+
+
+        long start = System.currentTimeMillis();
+        Configuration conf = new Configuration();
+        Job job1 = Job.getInstance(conf, "Select users with the same nationality (Chinese)");
+
+        job1.setJarByClass(TaskA.class);
+        job1.setMapperClass(TaskAMapper.class);
+
+        job1.setOutputKeyClass(Text.class);
+        job1.setOutputValueClass(Text.class);
+
+        FileInputFormat.addInputPath(job1, new Path(input));
+        FileOutputFormat.setOutputPath(job1, new Path(output));
+        job1.waitForCompletion(true);
+        long end = System.currentTimeMillis();
+        long timeTaken = end - start;
+        System.out.println("Time Taken: " + timeTaken);
+
+    }
 
     public static void main(String[] args) throws Exception, ClassNotFoundException {
 
@@ -51,27 +72,30 @@ public class TaskA {
 //        Input file : FaceInPage
 
 //        Job Driver
-        long start = System.currentTimeMillis();
-        Configuration conf = new Configuration();
-        Job job1 = Job.getInstance(conf, "Select users with the same nationality (Chinese)");
 
-        job1.setJarByClass(TaskA.class);
-        job1.setMapperClass(TaskAMapper.class);
-
-        job1.setOutputKeyClass(Text.class);
-        job1.setOutputValueClass(Text.class);
-
-        String input = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
-        String hdfsOutput = "hdfs://localhost:9000/Project1/Output/TaskA";
+        String inputTest = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
+        String input = "hdfs://localhost:9000/Project1/Final/faceInPage.csv";
+        String hdfsOutputTest = "hdfs://localhost:9000/Project1/Output/TaskA/Test";
+        String hdfsOutput = "hdfs://localhost:9000/Project1/Output/TaskA/Final";
+        String outputTest = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskA/Test";
         String output = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskA/Final";
 
-        FileInputFormat.addInputPath(job1, new Path(input));
-        FileOutputFormat.setOutputPath(job1, new Path(output));
-        job1.waitForCompletion(true);
-        long end = System.currentTimeMillis();
-        long timeTaken = end - start;
-        System.out.println("Time Taken: " + timeTaken);
 
+        // Running with Test Files
+        // Output Locally
+        simple(inputTest, outputTest);
 
-    }
+        // Running with Test Files
+        // Output HDFS
+        simple(inputTest, hdfsOutput);
+
+        // Running with Actual Files
+        // Output Locally
+        simple(input, output);
+
+        // Running with Actual Files
+        // Output HDFS
+        simple(input, hdfsOutputTest);
+
+}
 }
