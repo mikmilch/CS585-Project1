@@ -10,6 +10,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class TaskC {
 
@@ -58,11 +59,8 @@ public class TaskC {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    private static void simple() throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
 
-//        Report for each country, how many of its citizens have a FaceInPage
-
-//        Job Driver
 
         long start = System.currentTimeMillis();
 
@@ -71,14 +69,14 @@ public class TaskC {
 
         job1.setJarByClass(TaskC.class);
         job1.setMapperClass(Map.class);
-//        job1.setCombinerClass(Reduce.class);
         job1.setReducerClass(Reduce.class);
 
         job1.setOutputKeyClass(Text.class);
         job1.setOutputValueClass(IntWritable.class);
 
         String input = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
-        String output = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskC/Final";
+        String hdfsOutput = "hdfs://localhost:9000/Project1/Output/TaskC/Simple";
+        String output = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskC/Simple/Final";
 
         FileInputFormat.addInputPath(job1, new Path(input));
         FileOutputFormat.setOutputPath(job1, new Path(output));
@@ -86,7 +84,46 @@ public class TaskC {
 
         long end = System.currentTimeMillis();
         long timeTaken = end - start;
-        System.out.println("Time Taken: " + timeTaken);
-//        System.exit(job1.waitForCompletion(true) ? 0 : 1);
+        System.out.println("Simple Time Taken: " + timeTaken);
+    }
+
+    private static void advanced() throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+
+
+        long start = System.currentTimeMillis();
+
+        Configuration conf = new Configuration();
+        Job job1 = Job.getInstance(conf, "Count ");
+
+        job1.setJarByClass(TaskC.class);
+        job1.setMapperClass(Map.class);
+        job1.setCombinerClass(Reduce.class);
+        job1.setReducerClass(Reduce.class);
+
+        job1.setOutputKeyClass(Text.class);
+        job1.setOutputValueClass(IntWritable.class);
+
+        String input = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
+        String hdfsOutput = "hdfs://localhost:9000/Project1/Output/TaskC/Advanced";
+        String output = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskC/Advanced/Final";
+
+        FileInputFormat.addInputPath(job1, new Path(input));
+        FileOutputFormat.setOutputPath(job1, new Path(output));
+        job1.waitForCompletion(true);
+
+        long end = System.currentTimeMillis();
+        long timeTaken = end - start;
+        System.out.println("Advanced Time Taken: " + timeTaken);
+    }
+
+    public static void main(String[] args) throws Exception {
+
+//        Report for each country, how many of its citizens have a FaceInPage
+
+//        Job Driver
+
+
+        simple();
+        advanced();
     }
 }

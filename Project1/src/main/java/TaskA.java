@@ -62,11 +62,11 @@ public class TaskA {
         job1.setOutputValueClass(Text.class);
 
         String input = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
+        String hdfsOutput = "hdfs://localhost:9000/Project1/Output/TaskA";
         String output = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskA/Final";
 
         FileInputFormat.addInputPath(job1, new Path(input));
         FileOutputFormat.setOutputPath(job1, new Path(output));
-//        System.exit(job1.waitForCompletion(true) ? 0 : 1);
         job1.waitForCompletion(true);
         long end = System.currentTimeMillis();
         long timeTaken = end - start;

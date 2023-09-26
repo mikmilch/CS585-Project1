@@ -165,50 +165,43 @@ public class TaskD {
 
         @Override
         protected void setup(Context context) throws IOException, InterruptedException{
-            System.out.println("1");
+//            System.out.println("1");
             URI[] cacheFiles = context.getCacheFiles();
             Path path = new Path(cacheFiles[0]);
 
 
             FileSystem fs = FileSystem.get(context.getConfiguration());
-            System.out.println(path);
+//            System.out.println(path);
             FSDataInputStream fis = fs.open(path);
-            System.out.println(fis);
+//            System.out.println(fis);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(fis, "UTF-8"));
 
-//            System.out.println(reader.lines().count());
-//            int lines = (int) reader.lines().count();
-
             String line;
 
-            System.out.println(reader.readLine());
-            System.out.println(reader.readLine());
-            System.out.println(reader.readLine());
-            System.out.println(reader.readLine());
             while (StringUtils.isNotEmpty(line = reader.readLine())){
-//            for (int i = 0 ; i < 200; i++) {
-//                line = reader.readLine();
-
-                System.out.println(line);
-                String[] split = line.split(" ");
-                relationMap.put(split[0], split[1]);
+                try {
+//                    System.out.println(line);
+                    String[] split = line.split("\t");
+                    relationMap.put(split[0], split[1]);
+                }catch(Exception e){
+                    System.out.println(e);
+                }
             }
-
             IOUtils.closeStream(reader);
         }
 
         public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
 
-            System.out.println("Test");
-
             String line = value.toString();
+//            System.out.println(line);
 
             String[] split = line.split(",");
 
             String relationships = relationMap.get(split[0]);
+//            System.out.println("Rel: " + relationships);
 
-            outvalue.set(relationships);
+            outvalue.set(new Text(relationships));
 
             context.write(new Text(split[1]), outvalue);
 
@@ -230,7 +223,7 @@ public class TaskD {
 
         String input = "hdfs://localhost:9000/Project1/Testing/associatesTest.csv";
 //        String input = "file:///C:/Users/nickl/OneDrive/Desktop/data/Testing/tested.csv";
-        String output = "file:///C:/Users/nickl/OneDrive/Desktop/output";
+        String output = "file:///C:/Users/nickl/OneDrive/Desktop/output/taskD/Simple";
 //                "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskD/count";
 
         FileInputFormat.addInputPath(job1, new Path(input));
@@ -244,7 +237,7 @@ public class TaskD {
         job2.setJarByClass(TaskD.class);
 //
         String input1 = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
-        String output1 = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskD/Final";
+        String output1 = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskD/Final/Simple";
 //
         MultipleInputs.addInputPath(job2,new Path(output),TextInputFormat.class,AssociatesMap.class);
         MultipleInputs.addInputPath(job2, new Path(input1), TextInputFormat.class, FaceInMap.class);
@@ -260,7 +253,7 @@ public class TaskD {
         job2.waitForCompletion(true);
         long end = System.currentTimeMillis();
         long timeTaken = end - start;
-        System.out.println("Time Taken: " + timeTaken);
+        System.out.println("Simple Approach Time Taken: " + timeTaken);
     }
 
     private static void advanced() throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
@@ -278,7 +271,7 @@ public class TaskD {
 
         String input = "hdfs://localhost:9000/Project1/Testing/associatesTest.csv";
 //        String input = "file:///C:/Users/nickl/OneDrive/Desktop/data/Testing/tested.csv";
-        String output = "file:///C:/Users/nickl/OneDrive/Desktop/output";
+        String output = "file:///C:/Users/nickl/OneDrive/Desktop/output/taskD/Advanced";
 //                "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskD/count";
 
         FileInputFormat.addInputPath(job1, new Path(input));
@@ -302,11 +295,15 @@ public class TaskD {
         job3.setNumReduceTasks(0);
 
         String input1 = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
-        String output1 = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskD/Final";
+        String output1 = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskD/Final/Advanced";
 
         FileInputFormat.addInputPath(job3, new Path(input1));
         FileOutputFormat.setOutputPath(job3, new Path(output1));
         job3.waitForCompletion(true);
+        long end = System.currentTimeMillis();
+        long timeTaken = end - start;
+        System.out.println("Advanced Time Taken: " + timeTaken);
+
 //        System.exit(job3.waitForCompletion(true) ? 0 : 1);
     }
 
@@ -316,7 +313,7 @@ public class TaskD {
     ClassNotFoundException, InterruptedException{
 
 
-//        simple();
+        simple();
 
         advanced();
 
