@@ -17,102 +17,96 @@ import java.util.HashSet;
 
 public class TaskF {
 
-    public static class AssociatesMap extends Mapper<LongWritable, Text, Text, Text> {
 
+//    Mapper that reads in the csv file and maps the relationship between FaceIn Users
+//    Consumes <id, Associates>
+//    Produces <user1, user2> and <user2, user1>
+    public static class AssociatesMap extends Mapper<LongWritable, Text, Text, Text> {
 
         public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
+            // Associate
             String line = value.toString();
 
+            // Split by Column
             String[] split = line.split(",");
 
-            if (!split[0].equals("FriendRel")){
-//            System.out.println(split[0]);
-                context.write(new Text(split[1]), new Text("A" + split[2]));
-                context.write(new Text(split[2]), new Text("A" + split[1]));
-            }
-
-
+            // Write <key,value> = <User, User>
+            context.write(new Text(split[1]), new Text("A" + split[2]));
+            context.write(new Text(split[2]), new Text("A" + split[1]));
         }
     }
 
+
+//    Mapper that reads in the csv file and maps the access between FaceIn Users
+//    Consumes <id, AccessLog>
+//    Produces <user1, user2>  where user1 is the person accessing user2's page
     public static class AccessMap extends Mapper<LongWritable, Text, Text, Text> {
 
         private Text outkey = new Text();
         private Text outvalue = new Text();
         public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
+            // Access Log
             String line = value.toString();
 
+            // Split by Column
             String[] split = line.split(",");
 
-            if (!split[0].equals("AccessID")){
-//                System.out.println(split[0]);
-                outkey.set(split[1]);
-                outvalue.set("L" + split[2]);
-                context.write(outkey, outvalue);
-            }
-
-
+            outkey.set(split[1]); // Key = User
+            outvalue.set("L" + split[2]); // Value = "L" + User
+            context.write(outkey, outvalue);// Write <key,value> = <User, User>
         }
     }
 
+
+//    Reducer that takes in the outputs from the mappers and finds users that have a relationship with another but havent accessed
+//    Consumes <user1, user2>
+//    Produces <user, count of relationships of the user>
     public static class Reduce extends Reducer<Text, Text, Text, Text> {
 
-        HashSet<String> AssociatesSet = new HashSet<>();
-        HashSet<String> AccessSet = new HashSet<>();
+        private HashSet<String> AssociatesSet = new HashSet<>();
+        private HashSet<String> AccessSet = new HashSet<>();
 
-        int i = 0;
-        int n = 0;
-        int total = 0;
 
         public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
 
             AssociatesSet.clear();
             AccessSet.clear();
 
+            // For each output from mappers
             for (Text value : values) {
+
+                // If Associates
                 if (value.charAt(0) == 'A'){
-                    if (AssociatesSet.contains(key + " " + value.toString().substring(1))){
-                        System.out.println("I: " + i++);
-                        System.out.println(value);
-                        System.out.println(key + " " + value.toString().substring(1));
-                    }
+                    // Add to Associates Set
                     AssociatesSet.add(key + " " + value.toString().substring(1));
-//                    System.out.println("I: " + i++);
                 }
                 else{
+                    // Add to Access Set
                     AccessSet.add(key + " " + value.toString().substring(1));
                 }
             }
 
-//            for (String associate : AssociatesSet) {
-//                for (String access : AccessSet) {
-//                    if (!associate.equals(access)){
-//                        context.write(new Text(access.toString().split(" ")[0]), new Text(access.toString().split(" ")[1]));
-//                    }
-//                    else{
-//                        System.out.println(access);
-//                    }
-//                }
-//            }
-
+            // If Associates Set contains the access then remove (Leaving only associates that have not accessed)
             for (String access : AccessSet){
-                if (AssociatesSet.contains(access)){
-//                    System.out.println(access);
-                }
                 AssociatesSet.remove(access);
-//                System.out.println(access);
             }
 
+            // For Remaining Associates
             for (String associate : AssociatesSet){
+                // Write <key, value> = <User1, User2>
                 context.write(new Text(associate.toString().split(" ")[0]), new Text(associate.toString().split(" ")[1]));
             }
 
         }
     }
 
-    public static void main(String[] args) throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+
+    private static void simple() throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+
+        long start = System.currentTimeMillis();
+
 
         Configuration conf = new Configuration();
         Job job1 = Job.getInstance(conf, "Test");
@@ -140,6 +134,14 @@ public class TaskF {
         FileOutputFormat.setOutputPath(job1, new Path(output));
         job1.waitForCompletion(true);
 
+        long end = System.currentTimeMillis();
+        long timeTaken = end - start;
+        System.out.println("Simple Approach Time Taken: " + timeTaken);
+    }
+
+        public static void main(String[] args) throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+
+            simple();
     }
 }
 
