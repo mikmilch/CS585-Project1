@@ -5,14 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fee0956f-0d24-4e3f-9071-cd8ad824b6c9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskF.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskA/Final/._SUCCESS.crc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskA/Final/.part-r-00000.crc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskA/Final/_SUCCESS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskA/Final/part-r-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Advanced/Final/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Advanced/Final/.part-r-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Advanced/Final/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Advanced/Final/part-r-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Simple/Final/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Simple/Final/.part-r-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Simple/Final/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Simple/Final/part-r-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskD/Final/Advanced/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskD/Final/Advanced/.part-m-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskD/Final/Advanced/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskD/Final/Advanced/part-m-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskD/Final/Simple/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskD/Final/Simple/.part-r-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskD/Final/Simple/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/output/taskD/Final/Simple/part-r-00000" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/src/main/python/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/python/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskE.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskE.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/TaskD$MapJoin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskD$MapJoin.class" afterDir="false" />
     </list>
     <list id="e4542962-d385-4522-8772-90110580e571" name="Changes by madel" comment="" />
@@ -54,6 +66,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "taskF",
     "last_opened_file_path": "C:/Users/nickl/Downloads/Project1_Mikmilch/Project1_Mikmilch",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -266,9 +279,9 @@
       <list>
         <item itemvalue="Application.TaskC" />
         <item itemvalue="Application.TaskD" />
+        <item itemvalue="Application.TaskE" />
         <item itemvalue="Application.TaskF" />
         <item itemvalue="Application.TaskA" />
-        <item itemvalue="Application.TaskE" />
       </list>
     </recent_temporary>
   </component>

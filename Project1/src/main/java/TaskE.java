@@ -1,6 +1,7 @@
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -17,12 +18,12 @@ import java.util.ArrayList;
 public class TaskE {
 
 //    Mapper to go thorugh access logs and count the total amount of pages each user has accessed
-    public static class TotalMap extends Mapper<Object, Text, Text, IntWritable> {
+    public static class TotalMap extends Mapper<LongWritable, Text, Text, IntWritable> {
 
         private Text user = new Text();
         private IntWritable ones = new IntWritable(1);
 
-        public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+        public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
             String line = value.toString();
 
@@ -59,14 +60,14 @@ public class TaskE {
 
 
 //    Count only distinct accesses
-    public static class DistinctMap extends Mapper<Object, Text, Text, IntWritable> {
+    public static class DistinctMap extends Mapper<LongWritable, Text, Text, IntWritable> {
 
         private Text user = new Text();
         private IntWritable ones = new IntWritable(1);
 
         ArrayList<Text> distinctList = new ArrayList<Text>();
 
-        public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+        public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
             String line = value.toString();
 
@@ -108,12 +109,12 @@ public class TaskE {
     }
 
 
-    public static class TotalJoinMap extends Mapper<Object, Text, Text, Text> {
+    public static class TotalJoinMap extends Mapper<LongWritable, Text, Text, Text> {
 
         private Text outkey = new Text();
         private Text outvalue = new Text();
 
-        public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+        public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
             String line = value.toString();
 
@@ -126,12 +127,12 @@ public class TaskE {
     }
 
 
-    public static class DistinctJoinMap extends Mapper<Object, Text, Text, Text> {
+    public static class DistinctJoinMap extends Mapper<LongWritable, Text, Text, Text> {
 
         private Text outkey = new Text();
         private Text outvalue = new Text();
 
-        public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+        public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
             String line = value.toString();
 
@@ -143,12 +144,12 @@ public class TaskE {
         }
     }
 
-    public static class FaceInMap extends Mapper<Object, Text, Text, Text> {
+    public static class FaceInMap extends Mapper<LongWritable, Text, Text, Text> {
 
         private Text outkey = new Text();
         private Text outvalue = new Text();
 
-        public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+        public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
             String line = value.toString();
 

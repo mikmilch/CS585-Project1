@@ -30,10 +30,8 @@ public class TaskC {
             // Split by Column
             String[] split = line.split(",");
 
-            if (!split[2].equals("Nationality")) {
-                country.set(split[2]); // Key = Country
-                context.write(country, ones); // Write <key,value> = <Country, 1>
-            }
+            country.set(split[2]); // Key = Country
+            context.write(country, ones); // Write <key,value> = <Country, 1>
         }
     }
 
