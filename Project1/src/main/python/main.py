@@ -1,3 +1,5 @@
+import time
+
 import pandas as pd
 import uuid
 import random
@@ -7,7 +9,8 @@ import datetime
 # https://towardsdatascience.com/build-a-your-own-custom-dataset-using-python-9296540a0178 source
 
 # FaceInPage
-num_users = 200#200000
+num_users = 200000#200#
+# num_users = 200#
 
 features = [
     "ID",
@@ -19,7 +22,8 @@ features = [
 face_in_page = pd.DataFrame(columns=features)
 
 # Associates
-relations = 2000 #20000000
+relations = 20000000#2000 #
+# relations = 2000 #
 
 associates_features = [
     'FriendRel',
@@ -32,7 +36,8 @@ associates_features = [
 
 associates = pd.DataFrame(columns=associates_features)
 
-accesses = 1000 #10000000
+accesses = 10000000#1000
+# accesses = 1000
 
 access_features = [
     'AccessID',
@@ -49,6 +54,7 @@ faker = Faker()
 
 
 def FaceInPage():
+    print("Face In Page")
     # generating ids
     face_in_page['ID'] = [(i + 1) for i in range(num_users)]
 
@@ -68,14 +74,17 @@ def FaceInPage():
     hobbies_array = hobbies.to_numpy(dtype=str)
     face_in_page['Hobby'] = [hobbies_array[random.randint(0, len(hobbies_array)-1)][0] for i in range(num_users)]
 
-    face_in_page.to_csv("faceInPageTest.csv", index=False)
+    face_in_page.to_csv("faceInPage.csv", index=False, header=None)
+    # face_in_page.to_csv("faceInPageTest.csv", index=False, header=None)
 
 rel = []
+relSet = set()
 alist = []
 blist = []
 
 
 def Associates():
+    print("Associates")
     # Generate FriendRel
     associates['FriendRel'] = [(i + 1) for i in range(relations)]
 
@@ -95,7 +104,8 @@ def Associates():
     desc_list = ['Friend', 'College Friend', 'Family', 'Relative', 'Online Friend', 'Partner', 'Other']
 
     associates['Desc'] = [desc_list[random.randint(0, len(desc_list) - 1)] for i in range(relations)]
-    associates.to_csv('associatesTest.csv', index=False)
+    associates.to_csv('associates.csv', index=False, header=None)
+    # associates.to_csv('associatesTest.csv', index=False, header=None)
     # print(associates)
 
 
@@ -103,13 +113,15 @@ def Associates():
 def check(currentA, currentB):
     # print(currentA)
 
-    if str(currentA) + " " + str(currentB) in rel or str(currentB) + " " + str(currentA) in rel or currentB == currentA:
+    # if ()
+    if str(currentA) + " " + str(currentB) in relSet or str(currentB) + " " + str(currentA) in relSet or currentB == currentA:
         new_A = random.randint(1, len(face_in_page))
         new_B = random.randint(1, len(face_in_page))
         check(new_A, new_B)
     else:
-        rel.append(str(currentA) + " " + str(currentB))
-        rel.append(str(currentB) + " " + str(currentA))
+        relSet.add(str(currentA) + " " + str(currentB))
+        relSet.add(str(currentB) + " " + str(currentA))
+        print(len(relSet))
         alist.append(currentA)
         blist.append(currentB)
 
@@ -123,6 +135,7 @@ def check_dups(bywho, whatpage):
 by_who_list = []
 what_page_list = []
 def Access_logs():
+    print("Access Logs")
     # AccessID: unique sequential int from 1 to 10,000,000
     access_logs['AccessID'] = [(i + 1) for i in range(accesses)]
 
@@ -151,14 +164,18 @@ def Access_logs():
     # AccessTime: random number between 1 and 1,000,000 (or epoch time
     access_logs['AccessTime'] = [(random.randint(1, 1000000)) for i in range(accesses)]
 
-    access_logs.to_csv('accessLogsTest.csv', index=False)
+    access_logs.to_csv('accessLogs.csv', index=False, header=None)
+    # access_logs.to_csv('accessLogsTest.csv', index=False, header=None)
     # print(access_logs)
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     FaceInPage()
+    start = time.time()
     Associates()
+    end = time.time()
+    print("Time Taken: " + str(end - start))
     Access_logs()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
