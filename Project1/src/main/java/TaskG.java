@@ -1,5 +1,9 @@
+import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FSDataInputStream;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IOUtils;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -7,11 +11,15 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
-import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 /*
 Identify "outdated" FaceInPages. Return IDs and Names of persons that have not
@@ -38,21 +46,6 @@ public class TaskG {
         }
     }
 
-    public static class PartG_Name_Mapper extends Mapper<LongWritable, Text, IntWritable, Text> {
-        private final IntWritable outKey = new IntWritable();
-        private final Text outValue = new Text();
-
-        @Override
-        public void map(LongWritable key, Text value, Mapper<LongWritable, Text, IntWritable, Text>.Context context) throws IOException, InterruptedException {
-            String[] valueString = value.toString().split(",");
-
-            outKey.set(Integer.parseInt(valueString[0]));   // 0 is the ID column
-            outValue.set(new Text(valueString[1])); // 1 is the Name column
-
-            context.write(outKey, outValue);
-        }
-    }
-
     public static class PartG_Access_Time_Reducer extends Reducer<IntWritable, IntWritable, IntWritable, IntWritable> {
         // one minute is the scale of access logs so 90 days = 129,600 days
         private static final int ninetyDays = 129600;
@@ -70,27 +63,42 @@ public class TaskG {
         }
     }
 
-    public static class JoinReducer extends Reducer<IntWritable, Text, IntWritable, Text> {
+    public static class PartG_Join_Mapper
+            extends Mapper<LongWritable,Text,IntWritable,Text> {
 
-        private static final int ninetyDays = 129600;
+        private final Map<String, String> accessLogMap = new HashMap<>();
 
         @Override
-        public void reduce(IntWritable key, Iterable<Text> values, Context context)
+        protected void setup(Context context)
                 throws IOException, InterruptedException {
-            String accessTime = null;
-            String name = null;
+            URI[] cacheFiles = context.getCacheFiles();
+            Path path = new Path(cacheFiles[0]);
 
-            for (Text value : values) {
-                String stringValue = value.toString();
-                if (stringValue.matches("-?\\d+(\\.\\d+)?")) {
-                    accessTime = stringValue;
-                } else {
-                    name = stringValue;
+            FileSystem fs = FileSystem.get(context.getConfiguration());
+            FSDataInputStream fis = fs.open(path);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(fis, StandardCharsets.UTF_8));
+            String line;
+
+            while (StringUtils.isNotEmpty(line = br.readLine())) {
+                try {
+                    String[] split = line.split("\t");
+                    accessLogMap.put(split[0], split[1]);
+                }
+                catch (Exception e){
+                    System.out.println(e);
                 }
             }
+            // close the stream
+            IOUtils.closeStream(br);
+        }
 
-            if (accessTime != null && name != null) {
-                context.write(key, new Text(name));
+        @Override
+        protected void map(LongWritable key, Text value, Context context)
+                throws IOException, InterruptedException {
+            String[] values = value.toString().split(",");
+            if(accessLogMap.containsKey(values[0])){
+                context.write(new IntWritable(Integer.parseInt(values[0])), new Text(values[1]));
             }
         }
     }
@@ -111,44 +119,27 @@ public class TaskG {
         job1.setOutputValueClass(IntWritable.class);
 
         FileInputFormat.setInputPaths(job1, new Path("/Users/mikaelamilch/Downloads/data-2/Testing/accessLogsTest.csv"));
-        FileOutputFormat.setOutputPath(job1, new Path("/Users/mikaelamilch/Library/CloudStorage/OneDrive-WorcesterPolytechnicInstitute(wpi.edu)/2023-2024/CS 585/CS585-Project1/testg_output/job1"));
+        FileOutputFormat.setOutputPath(job1, new Path("/Users/mikaelamilch/Desktop/output"));
         job1.waitForCompletion(true);
 
-    //job 2 driver code here
-        Configuration conf2 = new Configuration();
-        Job job2= Job.getInstance(conf2, "Get Name");
-
-        job2.setJarByClass(TaskG.class);
-        job2.setMapperClass(PartG_Name_Mapper.class);
-        //job.setCombinerClass(PartB_Reducer.class);
-        //job2.setReducerClass(PartG_Access_Time_Reducer.class);
-
-        job2.setOutputKeyClass(IntWritable.class);
-        job2.setOutputValueClass(Text.class);
-
-        FileInputFormat.setInputPaths(job2, new Path("/Users/mikaelamilch/Downloads/data-2/Testing/faceInPageTest.csv"));
-        FileOutputFormat.setOutputPath(job2, new Path("/Users/mikaelamilch/Library/CloudStorage/OneDrive-WorcesterPolytechnicInstitute(wpi.edu)/2023-2024/CS 585/CS585-Project1/testg_output/job2"));
-        job2.waitForCompletion(true);
 
     //job 3 driver code here
-        Configuration conf3 = new Configuration();
-        Job job3= Job.getInstance(conf3, "Get Name");
+        Configuration conf2 = new Configuration();
+        conf2.set("dataPath", "/Users/mikaelamilch/Library/CloudStorage/OneDrive-WorcesterPolytechnicInstitute(wpi.edu)/2023-2024/CS 585/CS585-Project1/taskg_buffer");
+        Job job2= Job.getInstance(conf2, "Joining for name");
 
-        job3.setJarByClass(TaskG.class);
-        //job3.setMapperClass(PartG_Name_Mapper.class);
-        //job3.setCombinerClass(JoinReducer.class);
-        job3.setReducerClass(JoinReducer.class);
+        job2.setJarByClass(TaskG.class);
+        job2.setMapperClass(PartG_Join_Mapper.class);
 
-        job3.setOutputKeyClass(IntWritable.class);
-        job3.setOutputValueClass(Text.class);
+        job2.setMapOutputKeyClass(IntWritable.class);
+        job2.setMapOutputValueClass(Text.class);
+        //accessing the output file from job
+        job2.addCacheFile(new URI("/Users/mikaelamilch/Desktop/output/part-r-00000"));
 
-        String output1 = "/Users/mikaelamilch/Library/CloudStorage/OneDrive-WorcesterPolytechnicInstitute(wpi.edu)/2023-2024/CS 585/CS585-Project1/testg_output/job1";
-        String output2 = "/Users/mikaelamilch/Library/CloudStorage/OneDrive-WorcesterPolytechnicInstitute(wpi.edu)/2023-2024/CS 585/CS585-Project1/testg_output/job2";
+        job2.setNumReduceTasks(0);
 
-        MultipleInputs.addInputPath(job3, new Path(output2), TextInputFormat.class, PartG_Name_Mapper.class);
-        MultipleInputs.addInputPath(job3, new Path(output1), TextInputFormat.class, PartG_Access_Time_Mapper.class);
-
-        FileOutputFormat.setOutputPath(job3, new Path("/Users/mikaelamilch/Library/CloudStorage/OneDrive-WorcesterPolytechnicInstitute(wpi.edu)/2023-2024/CS 585/CS585-Project1/testg_output/job3"));
-        job3.waitForCompletion(true);
+        FileInputFormat.setInputPaths(job2, new Path("/Users/mikaelamilch/Downloads/data-2/Testing/faceInPageTest.csv"));
+        FileOutputFormat.setOutputPath(job2, new Path("/Users/mikaelamilch/Library/CloudStorage/OneDrive-WorcesterPolytechnicInstitute(wpi.edu)/2023-2024/CS 585/CS585-Project1/testg_output/job3"));
+        job2.waitForCompletion(true);
     }
 }
