@@ -1,6 +1,7 @@
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -11,160 +12,177 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 
 public class TaskE {
 
-//    Mapper to go thorugh access logs and count the total amount of pages each user has accessed
-    public static class TotalMap extends Mapper<Object, Text, Text, IntWritable> {
+//    Mapper that reads in the csv file and counts the total amount of pages each user has accessed
+//    Consumes <id, accessLogs>
+//    Produces <user, 1>
+    public static class TotalMap extends Mapper<LongWritable, Text, Text, IntWritable> {
 
         private Text user = new Text();
         private IntWritable ones = new IntWritable(1);
 
-        public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+        public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
+            // Access Log
             String line = value.toString();
 
+            // Split by Column
             String[] split = line.split(",");
 
-            if (!split[1].equals("ByWho")){
-                user.set(split[1]);
-                context.write(user, ones);
-//                context.write(user2, ones);
-            }
-
+//            System.out.println(split[0]);
+            user.set(split[1]); // Key = User
+            context.write(user, ones); // Write <key, value> = <User, 1>
         }
     }
 
-//    Count all Total accesses mapped
+//    Reducer that takes in the outputs from the mapper and counts all Total accesses of each user
+//    Consumes <User, [1 1 ... 1]>
+//    Produces <User, count of all accesses>
     public static class TotalReduce extends Reducer<Text, IntWritable, Text, IntWritable> {
 
         private IntWritable accesses = new IntWritable();
 
         public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
 
-            int sum = 0;
+            int sum = 0; // Count
 
+            // For each access
             for (IntWritable access : values) {
-                sum += access.get();
+                sum += access.get(); // Add to the count
             }
 
-            accesses.set(sum);
+            accesses.set(sum); // Value = Count of accesses by a user
 
-            context.write(key, accesses);
+            context.write(key, accesses); // Write <key, value> = <User, Count>
         }
     }
 
 
-
-//    Count only distinct accesses
-    public static class DistinctMap extends Mapper<Object, Text, Text, IntWritable> {
+//    Mapper that reads in the csv file and counts the total amount of distinct pages each user has accessed
+//    Consumes <id, accessLogs>
+//    Produces <user, 1> only if distinct
+    public static class DistinctMap extends Mapper<LongWritable, Text, Text, IntWritable> {
 
         private Text user = new Text();
         private IntWritable ones = new IntWritable(1);
 
-        ArrayList<Text> distinctList = new ArrayList<Text>();
+//        ArrayList<Text> distinctList = new ArrayList<Text>();
 
-        public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+        private HashSet<Text> distinctSet = new HashSet<>();
+        public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
+            // AccessLog
             String line = value.toString();
 
+            // Split by Column
             String[] split = line.split(",");
 
-            if (!split[1].equals("ByWho")){
-                System.out.println(split[1] + " " + split[2]);
-                System.out.println(distinctList.contains(new Text(split[1] + " " + split[2])));
-                if (!distinctList.contains(new Text(split[1] + " " + split[2]))) {
-                    user.set(split[1]);
-                    distinctList.add(new Text(split[1] + " " + split[2]));
-                    context.write(user, ones);
-                }
-                else{
-                    System.out.println(split[1] + " " + split[2]);
-                }
+            // If distinct
+            if (!distinctSet.contains(new Text(split[1] + " " + split[2]))) {
+                user.set(split[1]); // Key = User
+                distinctSet.add(new Text(split[1] + " " + split[2])); // Add to the list
+                context.write(user, ones); // Write <key, value> = <User, 1>
             }
-//            System.out.println(distinctList);
-
         }
-    }
+        }
 
+
+//    Reducer that takes in the outputs from the mapper and counts all distinct accesses of each user
+//    Consumes <User, [1 1 ... 1]>
+//    Produces <User, count of all distinct accesses>
     public static class DistinctReduce extends Reducer<Text, IntWritable, Text, IntWritable> {
 
         private IntWritable accesses = new IntWritable();
 
         public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
 
-            int sum = 0;
+            int sum = 0; // Count
 
+            // For each access
             for (IntWritable access : values) {
-                sum += access.get();
+                sum += access.get(); // add to the count
             }
 
-            accesses.set(sum);
+            accesses.set(sum); // Value = Count of distinct access
 
-            context.write(key, accesses);
+            context.write(key, accesses); // Wrote <key, values> = <User, Count of distinct access>
         }
     }
 
 
-    public static class TotalJoinMap extends Mapper<Object, Text, Text, Text> {
+//    Mapper that reads output from the output of the previous Map-Reduce Job and counts the total amount of  pages each user has accessed
+//    Consumes <id, <User, count of all accesses>>
+//    Produces <User, count of all accesses>
+    public static class TotalJoinMap extends Mapper<LongWritable, Text, Text, Text> {
 
         private Text outkey = new Text();
         private Text outvalue = new Text();
 
-        public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+        public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
             String line = value.toString();
 
             String[] split = line.split("\t");
 
-            outkey.set(split[0]);
-            outvalue.set("T" + split[1]);
-            context.write(outkey, outvalue);
+            outkey.set(split[0]); // Key = User
+            outvalue.set("T" + split[1]); // Value = "T" + Count of all accesses
+            context.write(outkey, outvalue); // Write <key, value> = <User, "T" + count of all accesses>
         }
     }
 
 
-    public static class DistinctJoinMap extends Mapper<Object, Text, Text, Text> {
+//    Mapper that reads output from the output of the previous Map-Reduce Job and counts the total amount of distinct pages each user has accessed
+//    Consumes <id, <User, count of all distinct accesses>>
+//    Produces <User, count of all distinct accesses>
+    public static class DistinctJoinMap extends Mapper<LongWritable, Text, Text, Text> {
 
         private Text outkey = new Text();
         private Text outvalue = new Text();
 
-        public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+        public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
             String line = value.toString();
 
             String[] split = line.split("\t");
 
-            outkey.set(split[0]);
-            outvalue.set("D" + split[1]);
-            context.write(outkey, outvalue);
+            outkey.set(split[0]); // Key = User
+            outvalue.set("D" + split[1]); // Value = "D" + count of all distinct accesses
+            context.write(outkey, outvalue); // Write <key, value> = <User, count of all distinct accesses>
         }
     }
 
-    public static class FaceInMap extends Mapper<Object, Text, Text, Text> {
+//    Mapper that reads in the csv file and count the country
+//    Consumes <id, FaceInPage>
+//    Produces <id, "F" + Name>
+    public static class FaceInMap extends Mapper<LongWritable, Text, Text, Text> {
 
         private Text outkey = new Text();
         private Text outvalue = new Text();
 
-        public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+        public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
             String line = value.toString();
 
             String[] split = line.split(",");
 
-            if (!split[0].equals("ID")){
-                outkey.set(split[0]);
-                outvalue.set("F" + split[1]);
+            outkey.set(split[0]); // Key = User
+            outvalue.set("F" + split[1]); // Value = "F" + Name
 
-                context.write(outkey, outvalue);
-            }
+            context.write(outkey, outvalue); // Write <key, value> = <User, "F" + Name>
 
 
         }
     }
 
+//    Reducer that takes in the outputs from the mappers and joins
+//    Consumes <id, Name/All Accesses/Distinct Access>
+//    Produces <Name, (All Accesses, Distinct Accesses)>
     public static class JoinReduce extends Reducer<Text, Text, Text, Text> {
 
         private ArrayList<Text> totalList = new ArrayList<Text>();
@@ -175,35 +193,45 @@ public class TaskE {
         private Text outvalue = new Text();
 
         private String joinType = null;
+
+        // Setup phase
+        // Get the Join Type
         public void setup(Context context){
             joinType = context.getConfiguration().get("join.type");
         }
 
         public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
 
+            // Clears the lists
             totalList.clear();
             distinctList.clear();
             faceInList.clear();
 
-            for(Text test : values){
+            // For each output of the mappers
+            for(Text value : values){
 
-                if (test.charAt(0) == 'F'){
-                    faceInList.add(new Text(test.toString().substring(1)));
+                // If from FaceInMap
+                if (value.charAt(0) == 'F'){
+                    faceInList.add(new Text(value.toString().substring(1)));
                 }
-                else if (test.charAt(0) == 'T'){
+                // If from Total Accesses
+                else if (value.charAt(0) == 'T'){
 
-                    totalList.add(new Text(test.toString().substring(1)));
+                    totalList.add(new Text(value.toString().substring(1)));
                 }
                 else{
-                    distinctList.add(new Text(test.toString().substring(1)));
+                    distinctList.add(new Text(value.toString().substring(1)));
                 }
             }
             executeJoinLogic(context);
         }
 
         private void executeJoinLogic(Context context) throws IOException, InterruptedException {
+
+            // For each user
             for (Text F : faceInList){
 
+                // If No Accesses
                 if (totalList.size() == 0){
                     context.write(F, new Text("Total: 0 , Distinct: 0"));
                 }
@@ -211,18 +239,17 @@ public class TaskE {
                     for (Text T : totalList) {
 
                         for (Text D : distinctList) {
-//                        System.out.println("F: " + F + ", T: " + T + ", D: " + D);
                             outvalue.set("Total: " + T + " , Distinct: " + D);
-                            context.write(F, outvalue);
+                            context.write(F, outvalue); // Write <name, (Total Accesses, Distinct Accesses)>
                         }
                     }
                 }
-
             }
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    private static void simple(String input, String input1, String tempOutput, String tempOutput1, String output) throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+        long start = System.currentTimeMillis();
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf, "Get Total Access By Each User");
 
@@ -233,12 +260,9 @@ public class TaskE {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
 
-        String input = "hdfs://localhost:9000/Project1/Testing/accessLogsTest.csv";
-//        "file:///C:/Users/nickl/OneDrive/Desktop/data/Testing/accessTesting.csv";
-        String output = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskE/total";
 
         FileInputFormat.addInputPath(job, new Path(input));
-        FileOutputFormat.setOutputPath(job, new Path(output));
+        FileOutputFormat.setOutputPath(job, new Path(tempOutput));
         job.waitForCompletion(true);
 
 
@@ -248,37 +272,152 @@ public class TaskE {
 
         job1.setJarByClass(TaskE.class);
         job1.setMapperClass(DistinctMap.class);
+//        job1.setCombinerClass(DistinctReduce.class);
         job1.setReducerClass(DistinctReduce.class);
 
         job1.setOutputKeyClass(Text.class);
         job1.setOutputValueClass(IntWritable.class);
 
-        String output1 = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskE/distinct";
 
         FileInputFormat.addInputPath(job1, new Path(input));
-        FileOutputFormat.setOutputPath(job1, new Path(output1));
+        FileOutputFormat.setOutputPath(job1, new Path(tempOutput1));
         job1.waitForCompletion(true);
 
-        
-        
+
+
         Configuration conf2 = new Configuration();
         Job job2 = Job.getInstance(conf2, "Join");
-
-        String input1 = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
-        String output2 = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskE/Final";
-
+        
 
         job2.setJarByClass(TaskE.class);
-        MultipleInputs.addInputPath(job2,new Path(output),TextInputFormat.class,TotalJoinMap.class);
-        MultipleInputs.addInputPath(job2,new Path(output1),TextInputFormat.class,DistinctJoinMap.class);
+        MultipleInputs.addInputPath(job2,new Path(tempOutput),TextInputFormat.class,TotalJoinMap.class);
+        MultipleInputs.addInputPath(job2,new Path(tempOutput1),TextInputFormat.class,DistinctJoinMap.class);
         MultipleInputs.addInputPath(job2, new Path(input1), TextInputFormat.class,FaceInMap.class);
 
         job2.setReducerClass(JoinReduce.class);
         job2.setOutputKeyClass(Text.class);
         job2.setOutputValueClass(Text.class);
 
-        FileOutputFormat.setOutputPath(job2, new Path(output2));
-        System.exit(job2.waitForCompletion(true) ? 0 : 1);
+        FileOutputFormat.setOutputPath(job2, new Path(output));
+        job2.waitForCompletion(true);
+        long end = System.currentTimeMillis();
+        long timeTaken = end - start;
+        System.out.println("Simple Approach Time Taken: " + timeTaken);
+    }
+
+    private static void advanced(String input, String input1, String tempOutput, String tempOutput1, String output) throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
+        long start = System.currentTimeMillis();
+        Configuration conf = new Configuration();
+        Job job = Job.getInstance(conf, "Get Total Access By Each User");
+
+        job.setJarByClass(TaskE.class);
+        job.setMapperClass(TotalMap.class);
+        job.setCombinerClass(TotalReduce.class);
+        job.setReducerClass(TotalReduce.class);
+
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(IntWritable.class);
+
+
+        FileInputFormat.addInputPath(job, new Path(input));
+        FileOutputFormat.setOutputPath(job, new Path(tempOutput));
+        job.waitForCompletion(true);
+
+
+
+        Configuration conf1 = new Configuration();
+        Job job1 = Job.getInstance(conf1, "Get Distinct Pages Accessed");
+
+        job1.setJarByClass(TaskE.class);
+        job1.setMapperClass(DistinctMap.class);
+        job1.setCombinerClass(DistinctReduce.class);
+        job1.setReducerClass(DistinctReduce.class);
+
+        job1.setOutputKeyClass(Text.class);
+        job1.setOutputValueClass(IntWritable.class);
+
+
+        FileInputFormat.addInputPath(job1, new Path(input));
+        FileOutputFormat.setOutputPath(job1, new Path(tempOutput1));
+        job1.waitForCompletion(true);
+
+
+
+        Configuration conf2 = new Configuration();
+        Job job2 = Job.getInstance(conf2, "Join");
+        
+
+        job2.setJarByClass(TaskE.class);
+        MultipleInputs.addInputPath(job2,new Path(tempOutput),TextInputFormat.class,TotalJoinMap.class);
+        MultipleInputs.addInputPath(job2,new Path(tempOutput1),TextInputFormat.class,DistinctJoinMap.class);
+        MultipleInputs.addInputPath(job2, new Path(input1), TextInputFormat.class,FaceInMap.class);
+
+        job2.setReducerClass(JoinReduce.class);
+        job2.setOutputKeyClass(Text.class);
+        job2.setOutputValueClass(Text.class);
+
+        FileOutputFormat.setOutputPath(job2, new Path(output));
+        job2.waitForCompletion(true);
+        long end = System.currentTimeMillis();
+        long timeTaken = end - start;
+        System.out.println("Advanced Approach Time Taken: " + timeTaken);
+    }
+
+    public static void main(String[] args) throws Exception {
+
+        String inputFaceInPageTest = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
+        String inputFaceInPage = "hdfs://localhost:9000/Project1/Final/faceInPage.csv";
+        String inputAccessLogsTest = "hdfs://localhost:9000/Project1/Testing/accessLogsTest.csv";
+        String inputAccessLogs = "hdfs://localhost:9000/Project1/Final/accessLogs.csv";
+
+        String hdfsAdvancedOutputTest = "hdfs://localhost:9000/Project1/Output/TaskE/Test/Advanced";
+        String hdfsAdvancedOutput = "hdfs://localhost:9000/Project1/Output/TaskE/Final/Advanced";
+        String hdfsSimpleOutputTest = "hdfs://localhost:9000/Project1/Output/TaskE/Test/Simple";
+        String hdfsSimpleOutput = "hdfs://localhost:9000/Project1/Output/TaskE/Final/Simple";
+
+//        String hdfsTempAdvancedOutputTest = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Test/Advanced/0";
+//        String hdfsTempAdvancedOutput = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Advanced/0";
+//        String hdfsTempSimpleOutputTest = "hdfs://localhost:9000/Project1/Output/TaskE/Test/Temp/Simple/0";
+//        String hdfsTempSimpleOutput = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Simple/0";
+//        String hdfsTempAdvancedOutputTest1 = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Test/Advanced/1";
+//        String hdfsTempAdvancedOutput1 = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Advanced/1";
+//        String hdfsTempSimpleOutputTest1 = "hdfs://localhost:9000/Project1/Output/TaskE/Test/Temp/Simple/1";
+//        String hdfsTempSimpleOutput1 = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Simple/1";
+
+        String hdfsTempAdvancedOutputTest = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskE/Test/Advanced/0";
+//                "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Test/Advanced";
+        String hdfsTempAdvancedOutput = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskE/Final/Advanced/0";
+//        "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Advanced";
+        String hdfsTempSimpleOutputTest = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskE/Test/Simple/0";
+//        "hdfs://localhost:9000/Project1/Output/TaskE/Test/Temp/Simple";
+        String hdfsTempSimpleOutput = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskE/Final/Simple/0";
+//        "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Simple";
+
+        String hdfsTempAdvancedOutputTest1 = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskE/Test/Advanced/1";
+//                "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Test/Advanced";
+        String hdfsTempAdvancedOutput1 = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskE/Final/Advanced/1";
+//        "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Advanced";
+        String hdfsTempSimpleOutputTest1 = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskE/Test/Simple/1";
+//        "hdfs://localhost:9000/Project1/Output/TaskE/Test/Temp/Simple";
+        String hdfsTempSimpleOutput1 = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskE/Final/Simple/1";
+//        "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Simple";
+
+        System.out.println("Task E\n");
+
+        System.out.println("Now Running Simple Methods");
+
+        System.out.println("Running Test Files");
+        simple(inputAccessLogsTest, inputFaceInPageTest, hdfsTempSimpleOutputTest, hdfsTempSimpleOutputTest1, hdfsSimpleOutputTest);
+        System.out.println("Running Actual Files");
+        simple(inputAccessLogs, inputFaceInPage, hdfsTempSimpleOutput, hdfsTempSimpleOutput1, hdfsSimpleOutput);
+
+        System.out.println("\nNow Running Advanced Methods");
+
+        System.out.println("Running Test Files");
+        advanced(inputAccessLogsTest, inputFaceInPageTest, hdfsTempAdvancedOutputTest, hdfsTempAdvancedOutputTest1, hdfsAdvancedOutputTest);
+        System.out.println("Running Actual Files");
+        advanced(inputAccessLogs, inputFaceInPage, hdfsTempAdvancedOutput, hdfsTempAdvancedOutput1, hdfsAdvancedOutput);
+
     }
     
     
