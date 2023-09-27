@@ -4,11 +4,6 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="fee0956f-0d24-4e3f-9071-cd8ad824b6c9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-=======
     <list default="true" id="fee0956f-0d24-4e3f-9071-cd8ad824b6c9" name="Changes" comment="First part of taskB should now work.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskE.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskE.java" afterDir="false" />
@@ -24,7 +19,6 @@
       <change beforePath="$PROJECT_DIR$/target/classes/TaskE$TotalReduce.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$TotalReduce.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/TaskE.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/TaskF.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskF.class" afterDir="false" />
->>>>>>> 1edf4c64cd03fadd85c0d3d0f1772e4f20310ab4
     </list>
     <list id="e4542962-d385-4522-8772-90110580e571" name="Changes by madel" comment="" />
     <list id="38587c85-cb04-4adf-85a5-008dbeeafd8e" name="Changes by mikaelamilch" comment="" />
@@ -33,7 +27,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" show_ignored="true" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -49,75 +42,47 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Livingwell088&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="21a0d334-a217-4a4c-97d2-4e6d7eb0dbab" />
-        <option name="url" value="https://github.com/mikmilch/CS585-Project1.git" />
-      </UrlAndAccount>
-    </option>
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 7
-}</component>
+        &quot;associatedIndex&quot;: 7
+        }</component>
   <component name="ProjectId" id="2VOhPstDsSaoPOyxBh0hArG20qN" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-<<<<<<< HEAD
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "1.8",
-    "last_opened_file_path": "C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/pom.xml",
-=======
-    "git-widget-placeholder": "finalRefactor",
-    "last_opened_file_path": "C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/src/main/java",
->>>>>>> 1edf4c64cd03fadd85c0d3d0f1772e4f20310ab4
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;finalRefactor&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/src/main/java&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1\src\main\java" />
       <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1\src\main" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1\src" />
-      <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1" />
-      <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1\src\main\data\Testing" />
       <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1\output" />
+      <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1" />
     </key>
   </component>
-<<<<<<< HEAD
-  <component name="RunManager" selected="Python.main">
-=======
   <component name="RunManager" selected="Application.TaskF">
->>>>>>> 1edf4c64cd03fadd85c0d3d0f1772e4f20310ab4
     <configuration default="true" type="docs" factoryName="Docutils task">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -152,27 +117,8 @@
       <option name="docutils_open_in_browser" value="false" />
       <method v="2" />
     </configuration>
-<<<<<<< HEAD
-    <configuration name="TaskA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TaskA" />
-      <module name="Project1" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TaskC" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TaskC" />
-      <module name="Project1" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TaskD" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TaskD" />
-=======
     <configuration name="TaskB" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TaskB" />
->>>>>>> 1edf4c64cd03fadd85c0d3d0f1772e4f20310ab4
       <module name="Project1" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -185,10 +131,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-<<<<<<< HEAD
-    <configuration default="true" type="DjangoTestsConfigurationType">
-      <module name="CS585-Project1" />
-=======
     <configuration name="TaskF" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TaskF" />
       <module name="Project1" />
@@ -211,7 +153,6 @@
       </method>
     </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType">
->>>>>>> 1edf4c64cd03fadd85c0d3d0f1772e4f20310ab4
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -222,10 +163,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-<<<<<<< HEAD
-=======
       <module name="" />
->>>>>>> 1edf4c64cd03fadd85c0d3d0f1772e4f20310ab4
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="TARGET" value="" />
       <option name="SETTINGS_FILE" value="" />
@@ -234,35 +172,7 @@
       <option name="OPTIONS" value="" />
       <method v="2" />
     </configuration>
-<<<<<<< HEAD
-    <configuration name="TaskaTest.debug" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Project1" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TaskaTest" />
-      <option name="METHOD_NAME" value="debug" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="Project1" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="Project1" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
-      <module name="CS585-Project1" />
-=======
-    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
->>>>>>> 1edf4c64cd03fadd85c0d3d0f1772e4f20310ab4
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -270,19 +180,12 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-<<<<<<< HEAD
-=======
       <module name="" />
->>>>>>> 1edf4c64cd03fadd85c0d3d0f1772e4f20310ab4
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="ADDITIONAL_ARGS" value="" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-<<<<<<< HEAD
-      <module name="CS585-Project1" />
-=======
->>>>>>> 1edf4c64cd03fadd85c0d3d0f1772e4f20310ab4
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -293,10 +196,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-<<<<<<< HEAD
-=======
       <module name="" />
->>>>>>> 1edf4c64cd03fadd85c0d3d0f1772e4f20310ab4
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
@@ -330,10 +230,6 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="Python.FlaskServer">
-<<<<<<< HEAD
-      <module name="CS585-Project1" />
-=======
->>>>>>> 1edf4c64cd03fadd85c0d3d0f1772e4f20310ab4
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -341,19 +237,12 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-<<<<<<< HEAD
-=======
       <module name="" />
->>>>>>> 1edf4c64cd03fadd85c0d3d0f1772e4f20310ab4
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="Tox" factoryName="Tox">
-<<<<<<< HEAD
-      <module name="CS585-Project1" />
-=======
->>>>>>> 1edf4c64cd03fadd85c0d3d0f1772e4f20310ab4
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -364,8 +253,6 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <method v="2" />
     </configuration>
-<<<<<<< HEAD
-=======
     <configuration default="true" type="tests" factoryName="Doctests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -394,7 +281,6 @@
         <item itemvalue="Application.TaskB" />
       </list>
     </recent_temporary>
->>>>>>> 1edf4c64cd03fadd85c0d3d0f1772e4f20310ab4
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -406,9 +292,6 @@
       <updated>1694713013669</updated>
       <workItem from="1694713017206" duration="9024000" />
       <workItem from="1695219444682" duration="1674000" />
-      <workItem from="1695677585428" duration="30000" />
-      <workItem from="1695677637285" duration="179000" />
-      <workItem from="1695677954536" duration="160000" />
     </task>
     <task id="LOCAL-00001" summary="First part of taskB should now work.">
       <option name="closed" value="true" />
@@ -439,12 +322,6 @@
     <MESSAGE value="First part of taskB should now work." />
     <option name="LAST_COMMIT_MESSAGE" value="First part of taskB should now work." />
   </component>
-<<<<<<< HEAD
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CS585_Project1$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1695218266658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Project1/src/main/python" />
-    <SUITE FILE_PATH="coverage/CS585_Project1$pytest_in_main_py.coverage" NAME="pytest in main.py Coverage Results" MODIFIED="1694715734916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Project1" />
-    <SUITE FILE_PATH="coverage/CS585_Project1$main.coverage" NAME="main Coverage Results" MODIFIED="1695668541747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Project1/src/main/python" />
-=======
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -474,7 +351,6 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
->>>>>>> 1edf4c64cd03fadd85c0d3d0f1772e4f20310ab4
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CS585_Project1$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1695218266658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Project1/src/main/python" />
