@@ -62,8 +62,7 @@ public class TaskG {
         private static final int ninetyDays = 129600;
 
         @Override
-        protected void reduce(IntWritable key, Iterable<IntWritable> values, Context context)
-                throws IOException, InterruptedException {
+        protected void reduce(IntWritable key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
             int minValue = Integer.MAX_VALUE;
             for (IntWritable value : values) {
                 minValue = Math.min(minValue, value.get());
@@ -74,14 +73,17 @@ public class TaskG {
         }
     }
 
-    public static class PartG_Join_Mapper
-            extends Mapper<LongWritable,Text,IntWritable,Text> {
+
+//    Mapper that takes in the outputs from the previous Map-Reduce Job and joins with FaceInPage
+//    Consumes <id, FaceInPage>
+//    Produces <id, name>
+    public static class JoinMapper extends Mapper<LongWritable,Text,IntWritable,Text> {
 
         private final Map<String, String> accessLogMap = new HashMap<>();
 
+        // Setup by reading in the file to store in memory for join
         @Override
-        protected void setup(Context context)
-                throws IOException, InterruptedException {
+        protected void setup(Context context) throws IOException, InterruptedException {
             URI[] cacheFiles = context.getCacheFiles();
             Path path = new Path(cacheFiles[0]);
 
@@ -105,11 +107,18 @@ public class TaskG {
         }
 
         @Override
-        protected void map(LongWritable key, Text value, Context context)
-                throws IOException, InterruptedException {
-            String[] values = value.toString().split(",");
-            if(accessLogMap.containsKey(values[0])){
-                context.write(new IntWritable(Integer.parseInt(values[0])), new Text(values[1]));
+        protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+
+            // FaceInPage user
+            String line = value.toString();
+
+            // Split by Column
+            String[] split = line.split(",");
+
+            // If the access was more than 90 days ago
+            if(accessLogMap.containsKey(split[0])){
+                // Write <key, value> = <id, name>
+                context.write(new IntWritable(Integer.parseInt(split[0])), new Text(split[1]));
             }
         }
     }
@@ -124,7 +133,6 @@ public class TaskG {
 
         job1.setJarByClass(TaskG.class);
         job1.setMapperClass(AccessTimeMapper.class);
-        //        job.setCombinerClass(PartB_Reducer.class);
         job1.setReducerClass(AccessTimeReducer.class);
 
         job1.setOutputKeyClass(IntWritable.class);
@@ -135,15 +143,16 @@ public class TaskG {
         job1.waitForCompletion(true);
 
 
-        //job 3 driver code here
+        //job 2 driver code here
         Configuration conf2 = new Configuration();
         Job job2= Job.getInstance(conf2, "Joining for name");
 
         job2.setJarByClass(TaskG.class);
-        job2.setMapperClass(PartG_Join_Mapper.class);
+        job2.setMapperClass(JoinMapper.class);
 
         job2.setMapOutputKeyClass(IntWritable.class);
         job2.setMapOutputValueClass(Text.class);
+
         //accessing the output file from job
         job2.addCacheFile(new URI(tempOutput + "/part-r-00000"));
 

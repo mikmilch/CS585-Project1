@@ -116,7 +116,7 @@ public class TaskF {
 
         MultipleInputs.addInputPath(job1,new Path(associatesInput), TextInputFormat.class, AssociatesMap.class);
         MultipleInputs.addInputPath(job1, new Path(accessInput), TextInputFormat.class, AccessMap.class);
-//
+
         job1.setReducerClass(Reduce.class);
 
         job1.setOutputKeyClass(Text.class);
@@ -142,11 +142,12 @@ public class TaskF {
         String hdfsSimpleOutput = "hdfs://localhost:9000/Project1/Output/TaskF/Final/Simple";
 
 
+        System.out.println("Task F");
         System.out.println("Now Running Simple Methods\n");
 
         System.out.println("Running Test Files");
         simple(inputAssociatesTest, inputAccessLogsTest, hdfsSimpleOutputTest);
-        System.out.println("\nRunning Actual Files");
+        System.out.println("Running Actual Files");
         simple(inputAssociates, inputAccessLogs, hdfsSimpleOutput);
     }
 }

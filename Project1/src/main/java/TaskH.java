@@ -26,6 +26,10 @@ import java.io.IOException;
 
 public class TaskH {
 
+
+//    Mapper that reads in the csv file and relationships between associates
+//    Consumes <id, Associates>
+//    Produces <user, 1> for both users of an existing relationship
     public static class AssociatesMapper extends Mapper<LongWritable, Text, IntWritable, IntWritable>{
 
         private IntWritable user1 = new IntWritable();
@@ -34,49 +38,64 @@ public class TaskH {
 
         public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
+            // Associate
             String line = value.toString();
 
+            // Split
             String[] split = line.split(",");
 
-            if (!split[0].equals("FriendRel")){
-                user1 = new IntWritable(Integer.parseInt(split[1]));
-                user2 = new IntWritable(Integer.parseInt(split[2]));
-                context.write(user1, one);
-                context.write(user2, one);
-            }
+            // Key = User
+            user1 = new IntWritable(Integer.parseInt(split[1]));
+            user2 = new IntWritable(Integer.parseInt(split[2]));
+
+            // <key, value> = <User, 1>
+            context.write(user1, one);
+            context.write(user2, one);
         }
     }
 
+
+//    Reducer that takes in the outputs from the mapper and sums that total
+//    Consumes <user, [1 1 ... 1]>
+//    Produces <user, count of relationships of the user>
     public static class AssociatesReduce extends Reducer<IntWritable, IntWritable, IntWritable, IntWritable> {
 
         private IntWritable count = new IntWritable();
 
         public void reduce(IntWritable key, Iterable<IntWritable> values, Context context)throws IOException, InterruptedException {
 
+            int sum = 0; // Count
 
-            int sum = 0;
-
+            // For each associate
             for (IntWritable value : values) {
-                sum += value.get();
+                sum += value.get(); // Add to the sum
             }
 
-            count.set(sum);
+            count.set(sum); // Value = count
 
-            context.write(key, count);
+            context.write(key, count); // Write <key, value> = <user, count of relationships of the user>
         }
     }
 
 
-
+//    Mapper that reads in the csv file and gets the average relationships of users
+//    Consumes <id, <user, count of relationships of the user>>
+//    Produces <user, count of relationships of the user>
     public static class AverageMap extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
 
         private IntWritable outkey = new IntWritable();
         private IntWritable outvalue = new IntWritable();
 
+
         public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
+            // Key = user
             outkey.set(Integer.parseInt(value.toString().split("\t")[0]));
+
+            // Value = count of relationships of the user
             outvalue.set(Integer.parseInt(value.toString().split("\t")[1]));
+
+            // Write <key, value> = <user, count of relationships of the user>
             context.write(outkey, outvalue);
 
         }
@@ -84,6 +103,9 @@ public class TaskH {
     }
 
 
+//    Reducer that takes in the outputs from the mapper and gets the average
+//    Consumes <user, count of relationships of the user>
+//    Produces <average, >
     public static class AverageReducer extends Reducer<IntWritable, IntWritable, FloatWritable, NullWritable> {
 
         private int count = 0;
@@ -93,26 +115,28 @@ public class TaskH {
 
         public void reduce(IntWritable key, Iterable<IntWritable> values, Context context)throws IOException, InterruptedException {
 
-            //int count = 0;
-            //int sum = 0;
-
+            // For each value
             for (IntWritable value : values) {
-                sum += value.get();
-                count++;
+                sum += value.get(); // Add to sum
+                count++; // Count
             }
-
 
         }
 
         @Override
         protected void cleanup(Reducer<IntWritable, IntWritable, FloatWritable, NullWritable>.Context context) throws IOException, InterruptedException {
-            // For the top 10 most accessed page
+
+            // Write <key, value> = <average, >
             avg.set(sum/count);
             context.write(avg, null);
         }
 
     }
 
+
+//    Reducer that takes in outputs from the two Map-Reduce jobs and joins based number of relationships of each user
+//    Consumes <id, Count of relationships>
+//    Produces <id, > if more popular than average
     public static class PopularMap extends Mapper<LongWritable, Text, IntWritable, NullWritable> {
 
         private IntWritable outkey = new IntWritable();
@@ -120,6 +144,9 @@ public class TaskH {
 
         private float avg;
 
+
+        // Setup phase
+        // Stores in memory the average
         @Override
         protected void setup(Context context) throws IOException, InterruptedException{
             URI[] cacheFiles = context.getCacheFiles();
@@ -134,20 +161,22 @@ public class TaskH {
             String line = reader.readLine();
 
             avg = Float.parseFloat(line);
-//            System.out.println(3);
 
             IOUtils.closeStream(reader);
         }
 
         public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
+            // For each user
             String line = value.toString();
 
+            // Split
             String[] split = line.split("\t");
 
+            // If more popular than average
             if (Integer.parseInt(split[1]) > avg){
-                outkey.set(Integer.parseInt(split[0]));
-                context.write(outkey, null);
+                outkey.set(Integer.parseInt(split[0])); // Key = id
+                context.write(outkey, null); // Write <id, >
             }
         }
 

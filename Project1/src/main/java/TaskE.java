@@ -14,6 +14,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 
 public class TaskE {
@@ -71,8 +72,9 @@ public class TaskE {
         private Text user = new Text();
         private IntWritable ones = new IntWritable(1);
 
-        ArrayList<Text> distinctList = new ArrayList<Text>();
+//        ArrayList<Text> distinctList = new ArrayList<Text>();
 
+        private HashSet<Text> distinctSet = new HashSet<>();
         public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
             // AccessLog
@@ -82,9 +84,9 @@ public class TaskE {
             String[] split = line.split(",");
 
             // If distinct
-            if (!distinctList.contains(new Text(split[1] + " " + split[2]))) {
+            if (!distinctSet.contains(new Text(split[1] + " " + split[2]))) {
                 user.set(split[1]); // Key = User
-                distinctList.add(new Text(split[1] + " " + split[2])); // Add to the list
+                distinctSet.add(new Text(split[1] + " " + split[2])); // Add to the list
                 context.write(user, ones); // Write <key, value> = <User, 1>
             }
         }
@@ -373,14 +375,32 @@ public class TaskE {
         String hdfsSimpleOutputTest = "hdfs://localhost:9000/Project1/Output/TaskE/Test/Simple";
         String hdfsSimpleOutput = "hdfs://localhost:9000/Project1/Output/TaskE/Final/Simple";
 
-        String hdfsTempAdvancedOutputTest = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Test/Advanced/0";
-        String hdfsTempAdvancedOutput = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Advanced/0";
-        String hdfsTempSimpleOutputTest = "hdfs://localhost:9000/Project1/Output/TaskE/Test/Temp/Simple/0";
-        String hdfsTempSimpleOutput = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Simple/0";
-        String hdfsTempAdvancedOutputTest1 = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Test/Advanced/1";
-        String hdfsTempAdvancedOutput1 = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Advanced/1";
-        String hdfsTempSimpleOutputTest1 = "hdfs://localhost:9000/Project1/Output/TaskE/Test/Temp/Simple/1";
-        String hdfsTempSimpleOutput1 = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Simple/1";
+//        String hdfsTempAdvancedOutputTest = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Test/Advanced/0";
+//        String hdfsTempAdvancedOutput = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Advanced/0";
+//        String hdfsTempSimpleOutputTest = "hdfs://localhost:9000/Project1/Output/TaskE/Test/Temp/Simple/0";
+//        String hdfsTempSimpleOutput = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Simple/0";
+//        String hdfsTempAdvancedOutputTest1 = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Test/Advanced/1";
+//        String hdfsTempAdvancedOutput1 = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Advanced/1";
+//        String hdfsTempSimpleOutputTest1 = "hdfs://localhost:9000/Project1/Output/TaskE/Test/Temp/Simple/1";
+//        String hdfsTempSimpleOutput1 = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Simple/1";
+
+        String hdfsTempAdvancedOutputTest = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskE/Test/Advanced/0";
+//                "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Test/Advanced";
+        String hdfsTempAdvancedOutput = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskE/Final/Advanced/0";
+//        "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Advanced";
+        String hdfsTempSimpleOutputTest = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskE/Test/Simple/0";
+//        "hdfs://localhost:9000/Project1/Output/TaskE/Test/Temp/Simple";
+        String hdfsTempSimpleOutput = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskE/Final/Simple/0";
+//        "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Simple";
+
+        String hdfsTempAdvancedOutputTest1 = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskE/Test/Advanced/1";
+//                "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Test/Advanced";
+        String hdfsTempAdvancedOutput1 = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskE/Final/Advanced/1";
+//        "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Advanced";
+        String hdfsTempSimpleOutputTest1 = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskE/Test/Simple/1";
+//        "hdfs://localhost:9000/Project1/Output/TaskE/Test/Temp/Simple";
+        String hdfsTempSimpleOutput1 = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskE/Final/Simple/1";
+//        "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Simple";
 
         System.out.println("Task E\n");
 
