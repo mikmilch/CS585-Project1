@@ -6,10 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="fee0956f-0d24-4e3f-9071-cd8ad824b6c9" name="Changes" comment="First part of taskB should now work.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/src/Test/java/TaskBTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/Test/java/TaskBTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskB.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskG.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskG.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskB$JoinMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskB$JoinMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/TaskB.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskB.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/TaskBTest.class" beforeDir="false" />
     </list>
     <list id="e4542962-d385-4522-8772-90110580e571" name="Changes by madel" comment="" />
     <list id="38587c85-cb04-4adf-85a5-008dbeeafd8e" name="Changes by mikaelamilch" comment="" />
@@ -50,7 +50,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Merging finalRefactor",
+    "git-widget-placeholder": "finalRefactor",
     "last_opened_file_path": "C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/src/main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -72,7 +72,7 @@
       <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TaskB">
+  <component name="RunManager" selected="Application.TaskG">
     <configuration default="true" type="docs" factoryName="Docutils task">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -107,13 +107,6 @@
       <option name="docutils_open_in_browser" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="TaskA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TaskA" />
-      <module name="Project1" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TaskB" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TaskB" />
       <module name="Project1" />
@@ -137,6 +130,13 @@
     </configuration>
     <configuration name="TaskE" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TaskE" />
+      <module name="Project1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskG" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TaskG" />
       <module name="Project1" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -264,11 +264,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TaskG" />
         <item itemvalue="Application.TaskB" />
         <item itemvalue="Application.TaskD" />
         <item itemvalue="Application.TaskE" />
         <item itemvalue="Application.TaskC" />
-        <item itemvalue="Application.TaskA" />
       </list>
     </recent_temporary>
   </component>

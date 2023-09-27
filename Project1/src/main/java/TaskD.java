@@ -191,7 +191,7 @@ public class TaskD {
         @Override
         protected void setup(Context context) throws IOException, InterruptedException{
             URI[] cacheFiles = context.getCacheFiles();
-            Path path = new Path(cacheFiles[0].toString().substring(6));
+            Path path = new Path(cacheFiles[0]);
 
 
             FileSystem fs = FileSystem.get(context.getConfiguration());

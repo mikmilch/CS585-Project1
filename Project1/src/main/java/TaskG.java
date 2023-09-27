@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,25 +29,35 @@ accessed FaceIn for 90 days (i.e., no entries in the AccessLog in the last 90 da
 
 public class TaskG {
 
-    public static class PartG_Access_Time_Mapper extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
+    public static class AccessTimeMapper extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
         private final IntWritable outKey = new IntWritable();
         private final IntWritable outValue = new IntWritable();
 
 
+//    Mapper that reads in the csv file that maps the accessTime of each user
+//    Consumes <id, AccessLogs>
+//    Produces <user, access time> for users
         @Override
-        protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, IntWritable, IntWritable>.Context context)
-                throws IOException, InterruptedException {
+        protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, IntWritable, IntWritable>.Context context) throws IOException, InterruptedException {
 
-            String[] valueString = value.toString().split(",");
+            // Access log
+            String line = value.toString();
 
-            outKey.set(Integer.parseInt(valueString[1]));   // 1 is the ByWho column
-            outValue.set(Integer.parseInt(valueString[4])); // 4 is the AccessTime column
+            // Split
+            String[] split = line.split(",");
 
-            context.write(outKey, outValue);
+            outKey.set(Integer.parseInt(split[1]));  // Key = User that accessed a page
+            outValue.set(Integer.parseInt(split[4])); // Value = the AccessTime
+
+            context.write(outKey, outValue); // Write <user, access time>
         }
     }
 
-    public static class PartG_Access_Time_Reducer extends Reducer<IntWritable, IntWritable, IntWritable, IntWritable> {
+
+//    Reducer that takes in the outputs from the mapper and sums that total
+//    Consumes <user, [1 1 ... 1]>
+//    Produces <user, count of relationships of the user>
+    public static class AccessTimeReducer extends Reducer<IntWritable, IntWritable, IntWritable, IntWritable> {
         // one minute is the scale of access logs so 90 days = 129,600 days
         private static final int ninetyDays = 129600;
 
@@ -103,29 +114,29 @@ public class TaskG {
         }
     }
 
+    private static void simple(String input, String input1, String tempOutput, String output) throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException {
 
-    public static void main(String[] args) throws Exception {
 
-    // job1 driver code here
+        long start = System.currentTimeMillis();
+        // job1 driver code here
         Configuration conf1 = new Configuration();
         Job job1= Job.getInstance(conf1, "Get inactive IDs");
 
         job1.setJarByClass(TaskG.class);
-        job1.setMapperClass(PartG_Access_Time_Mapper.class);
-//        job.setCombinerClass(PartB_Reducer.class);
-        job1.setReducerClass(PartG_Access_Time_Reducer.class);
+        job1.setMapperClass(AccessTimeMapper.class);
+        //        job.setCombinerClass(PartB_Reducer.class);
+        job1.setReducerClass(AccessTimeReducer.class);
 
         job1.setOutputKeyClass(IntWritable.class);
         job1.setOutputValueClass(IntWritable.class);
 
-        FileInputFormat.setInputPaths(job1, new Path("/Users/mikaelamilch/Downloads/data-2/Testing/accessLogsTest.csv"));
-        FileOutputFormat.setOutputPath(job1, new Path("/Users/mikaelamilch/Desktop/output"));
+        FileInputFormat.setInputPaths(job1, new Path(input));
+        FileOutputFormat.setOutputPath(job1, new Path(tempOutput));
         job1.waitForCompletion(true);
 
 
-    //job 3 driver code here
+        //job 3 driver code here
         Configuration conf2 = new Configuration();
-        conf2.set("dataPath", "/Users/mikaelamilch/Library/CloudStorage/OneDrive-WorcesterPolytechnicInstitute(wpi.edu)/2023-2024/CS 585/CS585-Project1/taskg_buffer");
         Job job2= Job.getInstance(conf2, "Joining for name");
 
         job2.setJarByClass(TaskG.class);
@@ -134,12 +145,45 @@ public class TaskG {
         job2.setMapOutputKeyClass(IntWritable.class);
         job2.setMapOutputValueClass(Text.class);
         //accessing the output file from job
-        job2.addCacheFile(new URI("/Users/mikaelamilch/Desktop/output/part-r-00000"));
+        job2.addCacheFile(new URI(tempOutput + "/part-r-00000"));
 
         job2.setNumReduceTasks(0);
 
-        FileInputFormat.setInputPaths(job2, new Path("/Users/mikaelamilch/Downloads/data-2/Testing/faceInPageTest.csv"));
-        FileOutputFormat.setOutputPath(job2, new Path("/Users/mikaelamilch/Library/CloudStorage/OneDrive-WorcesterPolytechnicInstitute(wpi.edu)/2023-2024/CS 585/CS585-Project1/testg_output/job3"));
+        FileInputFormat.setInputPaths(job2, new Path(input1));
+        FileOutputFormat.setOutputPath(job2, new Path(output));
         job2.waitForCompletion(true);
+
+        long end = System.currentTimeMillis();
+        long timeTaken = end - start;
+        System.out.println("Simple Time Taken: " + timeTaken);
+    }
+
+
+    public static void main(String[] args) throws Exception {
+
+        String inputFaceInPageTest = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
+        String inputFaceInPage = "hdfs://localhost:9000/Project1/Final/faceInPage.csv";
+        String inputAccessLogsTest = "hdfs://localhost:9000/Project1/Testing/accessLogsTest.csv";
+        String inputAccessLogs = "hdfs://localhost:9000/Project1/Final/accessLogs.csv";
+
+        String hdfsSimpleOutputTest = "hdfs://localhost:9000/Project1/Output/TaskG/Test/Simple";
+        String hdfsSimpleOutput = "hdfs://localhost:9000/Project1/Output/TaskG/Final/Simple";
+
+
+//        "hdfs://localhost:9000/Project1/Output/TaskG/Temp/Final/Advanced";
+        String hdfsTempSimpleOutputTest = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskG/Test/Simple/";
+//        "hdfs://localhost:9000/Project1/Output/TaskG/Test/Temp/Simple";
+        String hdfsTempSimpleOutput = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskG/Final/Simple/";
+//        "hdfs://localhost:9000/Project1/Output/TaskG/Temp/Final/Simple";
+
+
+
+        System.out.println("Task G\n");
+        System.out.println("Now Running Simple Methods");
+
+        System.out.println("Running Test Files");
+        simple(inputAccessLogsTest, inputFaceInPageTest, hdfsTempSimpleOutputTest, hdfsSimpleOutputTest);
+        System.out.println("Running Actual Files");
+        simple(inputAccessLogs, inputFaceInPage, hdfsTempSimpleOutput, hdfsSimpleOutput);
     }
 }
