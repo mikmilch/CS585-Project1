@@ -6,19 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fee0956f-0d24-4e3f-9071-cd8ad824b6c9" name="Changes" comment="First part of taskB should now work.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskE.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskE.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskF.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskF.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskG.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskG.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$DistinctJoinMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$DistinctJoinMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$DistinctMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$DistinctMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$DistinctReduce.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$DistinctReduce.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$FaceInMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$FaceInMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$JoinReduce.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$JoinReduce.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$TotalJoinMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$TotalJoinMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$TotalMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$TotalMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TaskE$TotalReduce.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE$TotalReduce.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TaskE.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TaskF.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskF.class" afterDir="false" />
     </list>
     <list id="e4542962-d385-4522-8772-90110580e571" name="Changes by madel" comment="" />
     <list id="38587c85-cb04-4adf-85a5-008dbeeafd8e" name="Changes by mikaelamilch" comment="" />
@@ -53,25 +41,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;finalRefactor&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/src/main/java&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/src/main/java",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1\src\main\java" />
@@ -275,10 +263,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.TaskF" />
+        <item itemvalue="Application.TaskB" />
         <item itemvalue="Application.TaskE" />
         <item itemvalue="Application.TaskH" />
         <item itemvalue="Application.TaskG" />
-        <item itemvalue="Application.TaskB" />
       </list>
     </recent_temporary>
   </component>

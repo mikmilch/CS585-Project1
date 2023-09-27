@@ -55,8 +55,8 @@ public class TaskG {
 
 
 //    Reducer that takes in the outputs from the mapper and sums that total
-//    Consumes <user, [1 1 ... 1]>
-//    Produces <user, count of relationships of the user>
+//    Consumes <user, accessTime>
+//    Produces <user, accessTime> for users that have not accessed in more than 90 days
     public static class AccessTimeReducer extends Reducer<IntWritable, IntWritable, IntWritable, IntWritable> {
         // one minute is the scale of access logs so 90 days = 129,600 days
         private static final int ninetyDays = 129600;
