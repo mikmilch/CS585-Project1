@@ -191,7 +191,7 @@ public class TaskD {
         @Override
         protected void setup(Context context) throws IOException, InterruptedException{
             URI[] cacheFiles = context.getCacheFiles();
-            Path path = new Path(cacheFiles[0]);
+            Path path = new Path(cacheFiles[0].toString().substring(6));
 
 
             FileSystem fs = FileSystem.get(context.getConfiguration());
@@ -222,6 +222,7 @@ public class TaskD {
 
             // Relationship count stored in the hashmap
             String relationships = relationMap.get(split[0]);
+//            System.out.println(relationships);
 
             outvalue.set(new Text(relationships)); // Value = Count
 
@@ -300,7 +301,7 @@ public class TaskD {
         job3.setOutputKeyClass(Text.class);
         job3.setOutputValueClass(Text.class);
 
-        job3.addCacheFile(new URI(tempOutput + "/part-r-00000"));
+        job3.addCacheFile(new URI(tempOutput + "/part-r-00000")); //
 
         job3.setNumReduceTasks(0);
 
@@ -315,8 +316,7 @@ public class TaskD {
 
 
 
-    public static void main(String[] args) throws IOException, URISyntaxException,
-    ClassNotFoundException, InterruptedException{
+    public static void main(String[] args) throws IOException, URISyntaxException,ClassNotFoundException, InterruptedException{
 
         String inputFaceInPageTest = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
         String inputFaceInPage = "hdfs://localhost:9000/Project1/Final/faceInPage.csv";
@@ -328,23 +328,28 @@ public class TaskD {
         String hdfsSimpleOutputTest = "hdfs://localhost:9000/Project1/Output/TaskD/Test/Simple";
         String hdfsSimpleOutput = "hdfs://localhost:9000/Project1/Output/TaskD/Final/Simple";
 
-        String hdfsTempAdvancedOutputTest = "hdfs://localhost:9000/Project1/Output/TaskD/Temp/Test/Advanced";
-        String hdfsTempAdvancedOutput = "hdfs://localhost:9000/Project1/Output/TaskD/Temp/Final/Advanced";
-        String hdfsTempSimpleOutputTest = "hdfs://localhost:9000/Project1/Output/TaskD/Test/Temp/Simple";
-        String hdfsTempSimpleOutput = "hdfs://localhost:9000/Project1/Output/TaskD/Temp/Final/Simple";
+    String hdfsTempAdvancedOutputTest = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskD/Test/Advanced/";
+//                "hdfs://localhost:9000/Project1/Output/TaskD/Temp/Test/Advanced";
+        String hdfsTempAdvancedOutput = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskD/Final/Advanced/";
+//        "hdfs://localhost:9000/Project1/Output/TaskD/Temp/Final/Advanced";
+        String hdfsTempSimpleOutputTest = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskD/Test/Simple/";
+//        "hdfs://localhost:9000/Project1/Output/TaskD/Test/Temp/Simple";
+        String hdfsTempSimpleOutput = "file:///C:/Users/nickl/OneDrive/Desktop/output/Temp/TaskD/Final/Simple/";
+//        "hdfs://localhost:9000/Project1/Output/TaskD/Temp/Final/Simple";
 
-        System.out.println("Now Running Simple Methods\n");
+        System.out.println("Task D\n");
+        System.out.println("Now Running Simple Methods");
 
         System.out.println("Running Test Files");
         simple(inputAssociatesTest, inputFaceInPageTest, hdfsTempSimpleOutputTest, hdfsSimpleOutputTest);
-        System.out.println("\nRunning Actual Files");
+        System.out.println("Running Actual Files");
         simple(inputAssociates, inputFaceInPage, hdfsTempSimpleOutput, hdfsSimpleOutput);
 
-        System.out.println("\nNow Running Advanced Methods\n");
+        System.out.println("\nNow Running Advanced Methods");
 
         System.out.println("Running Test Files");
         advanced(inputAssociatesTest, inputFaceInPageTest, hdfsTempAdvancedOutputTest, hdfsAdvancedOutputTest);
-        System.out.println("\nRunning Actual Files");
+        System.out.println("Running Actual Files");
         advanced(inputAssociates, inputFaceInPage, hdfsTempAdvancedOutput, hdfsAdvancedOutput);
 
     }

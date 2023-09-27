@@ -75,27 +75,18 @@ public class TaskA {
 
         String inputTest = "hdfs://localhost:9000/Project1/Testing/faceInPageTest.csv";
         String input = "hdfs://localhost:9000/Project1/Final/faceInPage.csv";
-        String hdfsOutputTest = "hdfs://localhost:9000/Project1/Output/TaskA/Test";
-        String hdfsOutput = "hdfs://localhost:9000/Project1/Output/TaskA/Final";
-        String outputTest = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskA/Test";
-        String output = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/taskA/Final";
+        String outputTest = "hdfs://localhost:9000/Project1/Output/TaskA/Test";
+        String output = "hdfs://localhost:9000/Project1/Output/TaskA/Final";
 
 
-        // Running with Test Files
-        // Output Locally
+        System.out.println("Task A\n");
+        System.out.println("Now Running Simple Methods");
+
+        System.out.println("Running Test Files");
         simple(inputTest, outputTest);
 
-        // Running with Test Files
-        // Output HDFS
-        simple(inputTest, hdfsOutput);
-
-        // Running with Actual Files
-        // Output Locally
+        System.out.println("\nRunning Actual Files");
         simple(input, output);
-
-        // Running with Actual Files
-        // Output HDFS
-        simple(input, hdfsOutputTest);
 
 }
 }

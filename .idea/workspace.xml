@@ -5,36 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fee0956f-0d24-4e3f-9071-cd8ad824b6c9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Project1/output/TaskC/Final/Advanced/.part-r-00000.crc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project1/output/TaskC/Final/Advanced/part-r-00000" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project1/output/TaskC/Final/Simple/.part-r-00000.crc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project1/output/TaskC/Final/Simple/part-r-00000" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project1/output/TaskC/Test/Advanced/._SUCCESS.crc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project1/output/TaskC/Test/Advanced/_SUCCESS" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project1/output/TaskC/Test/Simple/._SUCCESS.crc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project1/output/TaskC/Test/Simple/_SUCCESS" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project1/output/taskA/Test/._SUCCESS.crc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project1/output/taskA/Test/.part-r-00000.crc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project1/output/taskA/Test/_SUCCESS" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project1/output/taskA/Test/part-r-00000" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskA/Final/.part-r-00000.crc" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/taskA/Final/.part-r-00000.crc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskA/Final/part-r-00000" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/taskA/Final/part-r-00000" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Advanced/Final/._SUCCESS.crc" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/TaskC/Final/Advanced/._SUCCESS.crc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Advanced/Final/.part-r-00000.crc" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/TaskC/Test/Advanced/.part-r-00000.crc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Advanced/Final/_SUCCESS" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/TaskC/Final/Advanced/_SUCCESS" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Advanced/Final/part-r-00000" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/TaskC/Test/Advanced/part-r-00000" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Simple/Final/._SUCCESS.crc" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/TaskC/Final/Simple/._SUCCESS.crc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Simple/Final/.part-r-00000.crc" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/TaskC/Test/Simple/.part-r-00000.crc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Simple/Final/_SUCCESS" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/TaskC/Final/Simple/_SUCCESS" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/output/taskC/Simple/Final/part-r-00000" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/output/TaskC/Test/Simple/part-r-00000" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Project1.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskA.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskC.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskE.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskE.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1/src/main/java/TaskF.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project1/src/main/java/TaskF.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/TaskA.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskA.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/TaskC.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskC.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TaskD$MapJoin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskD$MapJoin.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/TaskD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskD.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/TaskE.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TaskE.class" afterDir="false" />
     </list>
@@ -78,7 +57,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "taskF",
-    "last_opened_file_path": "C:/Users/nickl/Downloads/Project1_Mikmilch/Project1_Mikmilch",
+    "last_opened_file_path": "C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/src/main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -91,12 +70,15 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1\src\main" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1\output" />
       <recent name="C:\Users\nickl\OneDrive\Desktop\WPI Graduate\CS585 Big Data Management\Project1\CS585-Project1\Project1" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TaskF">
+  <component name="RunManager" selected="Application.TaskD">
     <configuration default="true" type="docs" factoryName="Docutils task">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -288,11 +270,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TaskF" />
-        <item itemvalue="Application.TaskE" />
         <item itemvalue="Application.TaskD" />
+        <item itemvalue="Application.TaskE" />
         <item itemvalue="Application.TaskC" />
         <item itemvalue="Application.TaskA" />
+        <item itemvalue="Application.TaskF" />
       </list>
     </recent_temporary>
   </component>
@@ -350,9 +332,9 @@
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Project1/src/main/java/TaskA.java</url>
-          <line>85</line>
-          <option name="timeStamp" value="20" />
+          <url>file://$PROJECT_DIR$/Project1/src/main/java/TaskD.java</url>
+          <line>192</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Project1/src/main/java/TaskC.java</url>

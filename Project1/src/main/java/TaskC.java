@@ -126,27 +126,24 @@ public class TaskC {
         String outputSimple = "file:///C:/Users/nickl/OneDrive/Desktop/WPI Graduate/CS585 Big Data Management/Project1/CS585-Project1/Project1/output/TaskC/Final/Simple";
 
 
+        System.out.println("Task C\n");
         System.out.println("Now Running Simple Methods");
 
         System.out.println("Running Test Files");
         simple(inputTest, hdfsSimpleOutputTest);
-        simple(inputTest, outputSimpleTest);
 
         System.out.println("Running Actual Files");
         simple(input, hdfsSimpleOutput);
-        simple(input, outputSimple);
 
 
-        System.out.println("Now Running Advanced Methods");
+        System.out.println("\nNow Running Advanced Methods");
 
         System.out.println("Running Test Files");
         advanced(inputTest, hdfsAdvancedOutputTest);
-        advanced(inputTest, outputAdvancedTest);
 
 
         System.out.println("Running Actual Files");
         advanced(input, hdfsAdvancedOutput);
-        advanced(input, outputAdvanced);
 
     }
 }

@@ -382,20 +382,21 @@ public class TaskE {
         String hdfsTempSimpleOutputTest1 = "hdfs://localhost:9000/Project1/Output/TaskE/Test/Temp/Simple/1";
         String hdfsTempSimpleOutput1 = "hdfs://localhost:9000/Project1/Output/TaskE/Temp/Final/Simple/1";
 
+        System.out.println("Task E\n");
 
-        System.out.println("Now Running Simple Methods\n");
+        System.out.println("Now Running Simple Methods");
 
         System.out.println("Running Test Files");
         simple(inputAccessLogsTest, inputFaceInPageTest, hdfsTempSimpleOutputTest, hdfsTempSimpleOutputTest1, hdfsSimpleOutputTest);
-        System.out.println("\nRunning Actual Files");
-//        simple(inputAccessLogs, inputFaceInPage, hdfsTempSimpleOutput, hdfsTempSimpleOutput1, hdfsSimpleOutput);
+        System.out.println("Running Actual Files");
+        simple(inputAccessLogs, inputFaceInPage, hdfsTempSimpleOutput, hdfsTempSimpleOutput1, hdfsSimpleOutput);
 
-        System.out.println("\nNow Running Advanced Methods\n");
+        System.out.println("\nNow Running Advanced Methods");
 
         System.out.println("Running Test Files");
         advanced(inputAccessLogsTest, inputFaceInPageTest, hdfsTempAdvancedOutputTest, hdfsTempAdvancedOutputTest1, hdfsAdvancedOutputTest);
-        System.out.println("\nRunning Actual Files");
-//        advanced(inputAccessLogs, inputFaceInPage, hdfsTempAdvancedOutput, hdfsTempAdvancedOutput1, hdfsAdvancedOutput);
+        System.out.println("Running Actual Files");
+        advanced(inputAccessLogs, inputFaceInPage, hdfsTempAdvancedOutput, hdfsTempAdvancedOutput1, hdfsAdvancedOutput);
 
     }
     
